@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>History of jQuery Events</title>
+</head>
+<body>
+
+<div id="container">
+    <ul id="list">
+        <li>Item #1</li>
+        <li>Item #2</li>
+        <li>Item #3</li>
+        <li>...</li>
+        <li>Item #100</li>
+    </ul>
+</div>
+
+.delegate() (Deprecated)
+
+<p>
+The .delegate() method provides a clear difference between the context
+    of where to attach delegated event handler, and the selector to match
+    when the event bubbles up to the delegated element.
+</p>
+
+Example:<br><br>
+
+$("#list").delegate("li","click", function(event){<br>
+var elem =$(this);<br>
+console.log(elem.text());<br>
+});<br><br>
+
+<script>
+    $("#list").delegate("li", "click", function(event){
+        var elem = $(this);
+        console.log(elem.text());
+    });
+</script>
+
+even though deprecated this example still works.
+
+
+</body>
+</html>

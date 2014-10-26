@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>jQuery Event Basics</title>
+</head>
+<body>
+
+
+<p>
+    jQuery offers convenience methods for most native browser events. These methods —
+    including .click(), .focus(), .blur(), .change(), etc. — are shorthand for jQuery's .on() method.
+    The on method is useful for binding the same handler function to multiple events, when you
+    want to provide data to the event handler, when you are working with custom events, or
+    when you want to pass an object of multiple events and handlers.
+</p>
+
+Example:<br><br>
+
+Equivalent event setup using the `.on()` method <br><br>
+
+$("p").on(click, function(){<br>
+console.log("clicked");<br>
+});<br>
+
+<script>
+    $("p").on("click",function(){
+        console.log("clicked");
+    });
+</script>
+
+
+</body>
+</html>

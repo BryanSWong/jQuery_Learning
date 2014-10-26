@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Triggering Event Handlers</title>
+</head>
+<body>
+
+
+<h4>How can I mimic a native browser event, if not .trigger()?</h4>
+
+<p>
+In order to trigger a native browser event, you have to use
+    document.createEventObject for < IE9 and document.createEvent
+    for all other browsers. Using these two APIs, you can programmatically
+    create an event that behaves exactly as if someone has actually clicked
+    on a file input box. The default action will happen, and the browse
+    file dialog will display.
+</p>
+<p>
+The jQuery UI Team created jquery.simulate.js in order to
+    simplify triggering a native browser event for use in
+    their automated testing. Its usage is modeled after jQuery's trigger.
+</p>
+
+Example:<br><br>
+
+<a href="http://learn.jquery.com">Learn JQuery</a> A Link
+
+$("a").simulate("click");<br><br>
+
+This will not only trigger the jQuery event handlers, but also <br>
+follow the link and change the current page.<br>
+
+<script>
+    $("a").simulate("click");
+</script>
+
+
+<h4>.trigger() vs .triggerHandler()</h4>
+There are four differences between .trigger() and .triggerHandler()<br><br>
+
+(1).triggerHandler() only triggers the event on the first element of a jQuery object.
+<br><br>
+
+(2).triggerHandler() cannot be chained. It returns the value that is <br>
+returned by the last handler, not a jQuery object.<br><br>
+(3).triggerHandler() will not cause the default behavior of the event (such as a form submission).
+<br><br>
+(4)Events triggered by .triggerHandler(), will not bubble up the DOM hierarchy.<br>
+Only the handlers on the single element will fire.<br>
+
+</body>
+</html>

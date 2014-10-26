@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Introducing Custom Events part 2</title>
+</head>
+<body>
+
+Let's make our example a little more interesting. <br>
+We'll add another room to our house, along with a master switch, as shown here:<br>
+
+Example html:<br><br>
+
+< div class="room" id="kitchen"><br>
+    < div class="lightbulb on">lightbulb< /div><br>
+    < div class="switch">switch< /div><br>
+    < div class="switch">switch< /div><br>
+    < div class="clapper">clapper< /div><br>
+< /div><br><br>
+
+< div class="room" id="bedroom"><br>
+    < div class="lightbulb on">lightbulb< /div><br>
+    < div class="switch">switch< /div><br>
+    < div class="switch">switch< /div><br>
+    < div class="clapper">clapper< /div><br>
+< /div><br><br>
+
+< div id="master_switch">master switch< /div><br><br>
+
+Example html in action:<br><br>
+<div class="room" id="kitchen">
+    Kitchen:<br>
+    <div class="lightbulb on">lightbulb</div>
+    <div class="switch">switch</div>
+    <div class="switch">switch</div>
+    <div class="clapper">clapper</div>
+</div><br>
+
+<div class="room" id="bedroom">
+    Bed Room:<br>
+    <div class="lightbulb on">lightbulb</div>
+    <div class="switch">switch</div>
+    <div class="switch">switch</div>
+    <div class="clapper">clapper</div>
+</div>
+<br>
+<div id="master_switch">master switch</div>
+
+<p>
+    If there are any lights on in the house, we want
+    the master switch to turn all the lights off; otherwise,
+    we want it to turn all lights on. To accomplish this, we'll
+    add two more custom events to the lightbulbs: turnOn and
+    turnOff. We'll make use of them in the changeState custom event,
+    and use some logic to decide which one the master switch should trigger:
+</p>
+
+Example script:<br><br>
+
+$(".lightbulb").on("changeState", function(e){<br>
+var light = $(this);<br>
+if(light.hasClass("on")){<br>
+light.trigger("turnOff");<br>
+} else{<br>
+light.trigger("turnOn");<br>
+}<br>
+}).on("turnOn", function(e){<br>
+$(this).removeClass("off").addClass("on");<br>
+}).on("turnOff", function(e){<br>
+$(this).removeClass("on").addClass("off");<br>
+});<br><br>
+
+$(".switch, .clapper").click(function(){<br>
+$(this).parent().find(".lightbulb").trigger("changeState");<br>
+});<br><br>
+
+$("#master_switch").click(function(){<br>
+if($(".lightbulb.on").length){<br>
+$(".lightbulb").trigger("turnOff");<br>
+} else {<br>
+$(".lightbulb").trigger("turnOn");<br>
+}<br>
+});<br><br>
+
+<script>
+    $(".lightbulb").on("changeState", function(e){
+        var light = $(this);
+        if(light.hasClass("on")){
+            light.trigger("turnOff");
+        } else{
+            light.trigger("turnOn");
+        }
+    }).on("turnOn", function(e){
+        $(this).removeClass("off").addClass("on");
+    }).on("turnOff", function(e){
+        $(this).removeClass("on").addClass("off");
+    });
+
+    $(".switch, .clapper").click(function(){
+        $(this).parent().find(".lightbulb").trigger("changeState");
+    });
+
+    $("#master_switch").click(function(){
+        if($(".lightbulb.on").length){
+            $(".lightbulb").trigger("turnOff");
+        } else {
+            $(".lightbulb").trigger("turnOn");
+        }
+    });
+
+</script>
+<p>
+Note how the behavior of the master switch is attached
+    to the master switch; the behavior of a lightbulb belongs to the lightbulbs.
+</p>
+
+<p>
+If you're accustomed to object-oriented programming,
+    you may find it useful to think of custom events
+    as methods of objects. Loosely speaking, the object
+    to which the method belongs is created via the jQuery
+    selector. Binding the changeState custom event to all
+    $( ".light" ) elements is akin to having a class called Light
+    with a method of changeState, and then instantiating new Light
+    objects for each element with a classname of light.
+</p>
+
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Iterating over jQuery and non-jQuery Objects</title>
+    <script>
+
+        $(document).ready(function(){
+
+
+            var sum =0;
+            var arr = [1,2,3,4,5];
+
+            $.each(arr, function(index, value){
+                sum+= value;
+            });
+
+            console.log(sum);
+
+
+            var sum2 =0;
+            var obj ={foo: 1, bar:2}
+
+
+            $.each(obj, function(key,value){
+               sum2+= value;
+
+            });
+
+
+            console.log(sum2);
+
+
+            $("li").each(function(index,element){
+                console.log($(this).text());
+            });
+
+
+            $("li").each(function(index, listItem){
+                this === listItem;
+
+                $.ajax({
+                    success: function(data){
+                        // The context has changed.
+                        // The "this" keyword no longer refers to listItem.
+
+                        this !== listItem;
+                    }
+                });
+            });
+
+
+           $("li").addClass("newClass");
+
+            $("input").each(function(i,el){
+                var elem = $(el);
+                elem.val(elem.val() + "%");
+            });
+
+
+            $("li").map(function(index,element){
+                return this.id;
+            }).get();
+
+
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+
+<h3>Iterating over jQuery and non-jQuery Objects</h3>
+
+$.each() is a generic iterator function for looping over object,<br>
+arrays, and array-like objects. Plain objects are iterated via their<br>
+named properties while arrays and array-like objects are iterated<br>
+via their indices.<br><br>
+
+$.each() is essentially a drop-in replacement of a traditional <br>
+for or for-in loop. Given:<br><br>
+javaScript<br>
+for(var i= 0; l= arr.length; i < l; i++) {<br>
+sum+= arr[i];<br>
+}<br><br>
+
+console.log(sum);<br><br>
+
+can be replaced by:<br><br>
+
+var sum =0;<br>
+var arr = [1,2,3,4,5];<br><br>
+
+$.each(arr, function(index, value){<br>
+sum+= value;<br>
+});<br><br>
+
+console.log(sum); // 15<br>
+
+inspect the web page to see result in console<br><br>
+
+Also in this case:<br><br>
+
+javaScript:<br><br>
+
+var sum2 =0;<br>
+var obj ={foo: 1, bar:2}<br><br>
+for(var item in obj){<br>
+sum2+= obj[item];<br>
+}<br><br>
+
+
+replaced by:<br>
+var sum2 =0;<br>
+var obj ={foo: 1, bar:2}<br><br>
+
+
+$.each(obj, function(key,value){<br>
+sum2+= value;<br>
+
+});<br><br>
+
+
+console.log(sum2);<br><br>
+
+
+
+For jQuery collections, use .each(). <br><br>
+
+.each() is used directly on a jQuery collection. It iterates over<br>
+each matched element in the collection and performs a callback <br>
+on that object.<br><br>
+
+
+example:<br><br>
+
+code:<br><br>
+
+$("li").each(function(index,element){<br>
+console.log($(this).text());<br>
+});<br>
+
+<ul>
+    <li><a href="#">Link 1</a></li>
+    <li><a href="#">Link 2</a></li>
+    <li><a href="#">Link 3</a></li>
+</ul><br><br>
+
+The Second Argument<br><br>
+
+$("li").each(function(index, listItem){<br>
+this === listItem;<br><br>
+
+$.ajax({<br>
+success: function(data){<br>
+// The context has changed.<br>
+// The "this" keyword no longer refers to listItem.<br><br>
+
+this !== listItem;<br>
+}<br>
+});<br>
+});<br>
+
+
+Many jQuery methods implicitly iterate over the entire collection,<br>
+applying their behavior to each matched element. For example, <br>
+this is unnecessary:<br><br>
+
+
+$("li").each(function(index,el){<br>
+$(el).addClass("newClass");<br>
+});<br><br>
+
+And this is fine:<br><br>
+
+$("li").addClass("newClass");<br>
+
+On the other hand, some methods do not iterate over the collection.<br>
+.each() is required when we need to get information from the element<br>
+before setting a new value.<br><br>
+
+This will not work:<br><br>
+
+$("input").val($(this).val()+"%");<br>
+/ .val() does not change the execution context, so this === window<br><br>
+
+Rather, this is how it should be written:<br><br>
+
+$("input").each(function(i,el){<br>
+var elem = $(el);<br>
+elem.val(elem.val() + "%");<br>
+});<br><br>
+
+
+For example, these are equivalent:<br><br>
+
+$("input").each(function(i,el){<br>
+var elem = $(el);<br>
+elem.val(elem.val() + "%");<br>
+});<br><br>
+
+
+$("input").val(function(index, value){<br>
+return value + "%";<br>
+});
+<br><br>
+
+<h3>.map()</h3>
+
+There is a common iteration use case that can be better handled <br>
+by using the .map() method. Anytime we want to create an array or <br>
+concatenated string based on all matched elements in our jQuery<br>
+selector, we're better served using .map().<br><br>
+
+For example instead of doing this:<br><br>
+
+var newArr =[];<br><br>
+
+$("li").each(function(){<br>
+newArr.push(this.id);<br>
+});<br><br>
+
+We can do this:<br><br>
+
+$("li").map(function(index,element){<br>
+return this.id;<br>
+}).get();<br><br>
+
+
+
+
+</body>
+</html>

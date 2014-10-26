@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Introducing Custom Events</title>
+</head>
+<body>
+
+<h4>Custom Events</h4>
+<p>
+We're all familiar with the basic events — click, mouseover, focus,
+    blur, submit, etc. — that we can latch on to as a user interacts
+    with the browser. Custom events open up a whole new world of
+    event-driven programming. In this chapter, we'll use jQuery's
+    custom events system to make a simple Twitter search application.
+</p>
+
+<p>
+It can be difficult at first to understand why you'd want
+    to use custom events, when the built-in events seem to
+    suit your needs just fine. It turns out that custom
+    events offer a whole new way of thinking about event-driven
+    JavaScript. Instead of focusing on the element that triggers
+    an action, custom events put the spotlight on the element
+    being acted upon. This brings a bevy of benefits, including:
+</p>
+
+<ul>
+    <li>Behaviors of the target element can easily
+        be triggered by different elements using the same code.</li>
+   <li>
+       Behaviors can be triggered across multiple, similar, target elements at once.
+   </li>
+    <li>
+    Behaviors are more clearly associated with the target
+    element in code, making code easier to read and maintain.
+    </li>
+</ul>
+
+<p>
+    Why should you care? An example is probably the best way to
+    explain. Suppose you have a lightbulb in a room in a house.
+    The lightbulb is currently turned on, and it's controlled by
+    two three-way switches and a clapper:
+</p>
+Example html:<br>
+< div> class="room" id="kitchen><br>
+< div class="lightbulb on">< /div><br>
+< div class="switch">< /div><br>
+< div class="switch">< /div><br>
+< div class="clapper"> < /div><br>
+< /div><br><br>
+
+Example html in action:
+<div class="room" id="kitchen">
+    <div class="lightbulb on">lightbulb</div>
+    <div class="switch">switch</div>
+    <div class="switch">switch</div>
+    <div class="clapper">clapper</div>
+</div>
+<br><br>
+Triggering the clapper or either of the switches will change <br>
+the state of the lightbulb. The switches and the clapper don't <br>
+care what state the lightbulb is in; they just want to change the state.<br><br>
+
+Example script:<br><br>
+
+$(".switch, .clapper").click(function(){<br>
+var light = $(this).parent().find(".lightbulb");<br>
+if(light.hasClass("on")){<br>
+light.removeClass("on").addClass("off");<br>
+} else{<br>
+light.removeClass("off").addClass("on");<br>
+}<br>
+});<br><br>
+
+<script>
+    $(".switch, .clapper").click(function(){
+        var light = $(this).parent().find(".lightbulb");
+        if(light.hasClass("on")){
+            light.removeClass("on").addClass("off");
+        } else{
+            light.removeClass("off").addClass("on");
+        }
+    });
+</script>
+
+
+
+
+</body>
+</html>

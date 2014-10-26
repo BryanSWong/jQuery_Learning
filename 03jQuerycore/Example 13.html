@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title> Attributes part 1</title>
+    <script>
+        $(document).ready(function(){
+            $("a").attr("href", "allMyHrefAreTheSameNow.html");
+            console.log("The href is now = allMyHrefAreTheSameNow.html ");
+
+            $("a").attr({
+                title: "all titles are the same too!",
+                href: "someThingNew.html"
+            });
+            console.log("The href is now = someThingNew.html");
+        });
+    </script>
+</head>
+<body>
+
+<h3>The .attr() method</h3>
+<p>The .attr() method acts as both a getter and a setter.
+    As a setter, .attr() can accept either a key and a value,
+    or an object containing one or more key/value pairs.
+</p>
+
+.attr() as a setter:<br><br>
+
+code:<br><br>
+
+$("a").attr("href", "allMyHrefsAreTheSameNow.html");<br><br>
+
+$("a").attr({<br>
+title: "all titles are the same too!",<br>
+href: "somethingNew.html"<br>
+});<br>
+
+the orginal a link below is:<br>
+< a href="Example 01.html">< /a><br><br>
+
+<a href="Example 01.html">This link has been changed.</a><br><br>
+
+
+if you inspect the webpage you will see that the href has been changed.<br>
+also a title was added, the reason why you don't see "allMyHrefsAreTheSameNow.html"<br>
+is becuase the next $("a") call changed it to "somethingNew.html"<br>
+but you can see all the action in console.
+
+
+
+</body>
+</html>

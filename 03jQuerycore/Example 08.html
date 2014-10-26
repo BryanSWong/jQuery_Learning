@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!-- Loading jQuery before other libraries. -->
+    <script src="jquery.js"></script>
+    <script src="prototype.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Avoiding Conflicts with Other Libraries part 3</title>
+    <script>
+        // Use full jQuery function name to reference jQuery.
+        jQuery(document).ready(function(){
+            jQuery("div").hide();
+        });
+
+        // Use the $ variable as defined in prototype.js
+        window.onload = function(){
+            var mainDiv = $("main");
+        };
+    </script>
+
+
+
+</head>
+<body>
+
+<h4>Including jQuery Before Other Libraries</h4>
+
+<p>The code snippets above rely on jQuery being loaded after
+    prototype.js is loaded. If you include jQuery before other
+    libraries, you may use jQuery when you do some work with
+    jQuery, but the $ will have the meaning defined in the
+    other library. There is no need to relinquish the $ alias
+    by calling jQuery.noConflict().</p>
+
+The code looks like:<br><br>
+
+< script src="jquery.js">< /script><br>
+< script src="prototype.js>< /script><br><br>
+
+< script><br><br>
+
+jQuery(document).ready(function(){<br><br>
+jQuery("div").hide();<br><br>
+
+});<br><br>
+
+window.onload = function(){<br><br>
+
+var mainDiv = $("main");<br><br>
+
+};<br><br>
+
+
+<h5>There is a div element below but the above code hides it</h5>
+
+<div>This is a div element.</div>
+
+
+</body>
+</html>

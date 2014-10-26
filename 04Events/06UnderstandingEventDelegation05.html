@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script href="jquery.js"></script>
+    <title>Understanding Event Delegation</title>
+</head>
+<body>
+
+<div id="container">
+    <ul id="list">
+        <li><a href="http://yahoo.com">Item #1</a></li>
+        <li><a href="http://google.com">Item #2</a></li>
+        <li><a href="http://bing.com">Item #3</a></li>
+        <li><a href="http://aol.com">Item #4</a></li>
+    </ul>
+</div>
+
+Example:<br><br>
+
+attach a delegated event<br>
+$("#list").on("click", "a", function(event){<br>
+var elem = $(this);<br>
+if(elem.is("[href^='http']")){<br>
+elem.attr("target","_blank");<br>
+}<br>
+});<br>
+
+the changes made allow the link to open with the event handling to open the links in new pages.
+<br><br>
+We can actually simplify our code by allowing the selector parameter of .on() do our logic for us:
+<br><br>
+
+Example:<br><br>
+
+attach a delegated event with a more refined selector<br>
+$("#list").on("click", "a[href^='http']", function(event){<br>
+$(this).attr("target", "_blank");<br>
+});<br>
+
+
+<script>
+    $("#list").on("click", "a[href^='http']", function(eevnet){
+        $(this).attr("target", "_blank");
+    });
+</script>
+
+
+<p>
+    Event delegation refers to the process of using event
+    propagation (bubbling) to handle events at a higher level
+    in the DOM than the element on which the event originated.
+    It allows us to attach a single event listener for elements
+    that exist now or in the future.
+</p>
+
+
+</body>
+</html>

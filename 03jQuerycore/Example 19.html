@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>The jQuery Object part 1</title>
+    <script>
+
+        $(document).ready(function(){
+
+            var target1 = document.getElementById("target1");
+
+            target1.innerHTML = "<td>Hello <b>World</b>!</td>";
+
+            var target2 = document.getElementById("target2");
+
+            $(target2).html("<td>Hello <b>World</b>!</td>")
+
+            var target3 = document.getElementById("target3");
+
+            var newElement = document.createElement("div");
+
+            target3.parentNode.insertBefore(newElement, target3.nextSibling);
+
+
+            var target4 = document.getElementById("target4");
+
+            var newElement2 = document.createElement("div");
+
+            $(target4).after(newElement2);
+
+
+        });
+
+    </script>
+</head>
+<body>
+
+Compatibility – The implementation of element methods varies across<br>
+browser vendors and versions. The following snippet attempts to set <br>
+the inner HTML of a < tr> element stored in target:<br><br>
+
+var target1 = document.getElementById( "target1" ); <br><br>
+target1.innerHTML = "< td>Hello < b>World< /b>!< /td>";<br><br><br>
+
+<table>
+<tr id="target1"></tr>
+    <tr><td>one row</td></tr>
+    <tr><td>next row</td></tr>
+
+</table>
+
+<br><br>
+the recommended approach is to use pure DOM methods instead. <br>
+By wrapping the target element in a jQuery object, these edge <br>
+cases are taken care of, and the expected result is achieved in <br>
+all supported browsers:<br><br>
+
+var target2 = document.getElementById("target2");<br><br>
+
+$(target2).html("< td>Hello < b>World< /b>!< /td>");<br><br>
+
+<table>
+    <tr id="target2"></tr>
+    <tr><td>one row</td></tr>
+    <tr><td>next row</td></tr>
+
+</table><br><br>
+
+
+Convenience – There are also a lot of common DOM manipulation use <br>
+cases that are awkward to accomplish with pure DOM methods. For instance,<br>
+inserting an element stored in newElement after the target element requires<br>
+a rather verbose DOM method:<br><br>
+
+
+Inserting a new element after another with the native DOM API.<br><br>
+
+var target3 = document.getElementById("target3");<br><br>
+
+var newElement = document.createElement("div");<br><br>
+
+target3.parentNode.insertBefore(newElement,target3.nextSibling);<br><br>
+
+
+<div id="target3">
+<a href="Example 01.html">This is a div</a>
+<p>It has a few things</p>
+</div><br><br>
+
+You have to inspect the web page to see that there is a new div<br>
+added to the document after this div with id= target3.<br><br>
+
+By wrapping the target4 element in a jQuery object, <br>
+the same task becomes much simpler:<br><br>
+
+Inserting a new element after another with jQuery.<br><br>
+
+var target4 = document.getElementById( "target4" );<br><br>
+
+var newElement2 = document.createElement( "div" );<br><br>
+
+$( target4 ).after( newElement2 );<br><br>
+
+<div id="target4">
+    <a href="Example 01.html">This is a div</a>
+    <p>It has a few things</p>
+</div><br><br>
+
+You have to inspect the web page to see that there is a new div<br>
+added to the document after this div with id= target4.<br><br>
+
+
+
+<br><br><br><br>
+</body>
+</html>

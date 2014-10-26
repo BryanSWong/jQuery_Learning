@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>$ vs $()</title>
+
+    <script>
+        $(document).ready(function(){
+            $("h1").remove();
+        });
+    </script>
+
+
+</head>
+<body>
+
+
+<h2>These is suppose to be a h1 header below this h2 header</h2>
+<h1>This is a h1 header</h1>
+
+<p>The jQuery script says $("h1").remove();</p>
+
+So the h1 is removed.
+
+<p>Code looks like:</p>
+
+< head > <br>
+
+< script > <br>
+$(document).ready(function(){ <br>
+$("h1").remove(); <br>
+});<br>
+< script > <br>
+
+
+
+
+
+</body>
+</html>

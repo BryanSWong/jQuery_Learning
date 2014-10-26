@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Selecting Elements part 2</title>
+    <script>
+
+        $(document).ready(function(){
+
+            console.log($("form :button"));
+
+
+            console.log($("form :checkbox"));
+
+
+            console.log($("form :checked"));
+
+
+            console.log($("form :disabled"));
+
+
+            console.log( $("form :enabled"));
+
+
+            console.log($("form :file"));
+
+
+            console.log($("form :image"));
+
+
+            console.log($("form :input"));
+
+
+            console.log($("form :password"));
+
+
+            console.log($("form :radio"));
+
+
+            console.log($("form input[name='gender'] :radio"));
+
+
+            console.log($("form :reset"));
+
+
+            console.log($("form :selected"));
+
+
+            console.log($("form :submit"));
+
+
+            console.log($("form :text"));
+
+
+
+
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+<h3>Selecting Form Elements</h3>
+
+jQuery offers several pseudo-selectors that help find elements in<br>
+forms. These are especially helpful because it can be difficult to<br>
+distinguish between form elements based on their state or type using<br>
+standard CSS selectors.<br><br>
+
+
+<h4>:button</h4><br>
+
+Using the :button pseudo-selector targets any<br>
+< button> elements and elements with a type="button":<br><br>
+
+$("form :button");<br><br>
+
+:checkbox<br>
+
+Using the :checkbox pseudo-selector targets any <br>
+< input> elements with a type="checkbox":<br><br>
+$("form :checkbox");<br><br>
+
+:checked<br><br>
+
+Not to be confused with :checkbox, :checked targets checked<br>
+checkboxes, but keep in mind that this selector works also for<br>
+checked radio buttons, and select elements (for select elements<br>
+only, use the :selected selector):<br><br>
+$("form :checked");<br><br>
+
+:disabled<br><br>
+
+Using the :disabled pseudo-selector targets any<br>
+< input> elements with the disabled attribute:<br><br>
+$("form :disabled");<br><br>
+
+:enabled<br><br>
+
+Basically the inverse of the :disabled pseudo-selector,<br>
+the :enabled pseudo-selector targets any elements that do not<br>
+have a disabled attribute:<br><br>
+$("form :enabled");<br><br>
+
+:file<br><br>
+
+Using the :file pseudo-selector targets any<br>
+< input> elements that have a type="file":<br><br>
+$("form :file");<br><br>
+
+:image<br><br>
+
+Using the :image pseudo-selector targets any<br>
+< input> elements that have a type="image":<br><br>
+$("form :image");<br><br>
+
+:input<br><br>
+
+Using the :input selector selects all < input>, < textarea>,<br>
+< select>, and < button> elements:<br><br>
+$("form :input");<br><br>
+
+:password<br><br>
+
+Using the :password pseudo-selector targets any<br>
+< input> elements with a type="password":<br><br>
+$("form :password");<br><br>
+
+radio<br><br>
+
+Using the :radio pseudo-selector targets any<br>
+< input> elements that have a type="radio":<br><br>
+$("form :radio");<br><br>
+
+To select a set of associated radio buttons use:<br><br>
+$("form input[name='gender'] :radio");<br><br>
+
+:reset<br><br>
+
+Using the :reset pseudo-selector targets any < input><br>
+elements that have a type="reset":<br><br>
+
+
+$("form :reset");<br><br>
+
+
+:selected<br><br>
+
+Using the :selected pseudo-selector targets any selected items in < option> elements:<br><br>
+
+$("form :selected");<br><br>
+
+:submit
+
+Using the :submit pseudo-selector targets any < button> or < input><br>
+elements with a type="submit":<br><br>
+$("form :submit");<br><br>
+
+:text<br><br>
+Using the :text pseudo-selector targets any < input> elements with a type="text":<br><br>
+
+$("form :text");<br><br>
+
+
+
+
+<form>
+
+    <input value="input"><br><br>
+    <input type="checkbox">active check box<br><br>
+    <input type="checkbox" disabled> inactive checkbox<br><br>
+    <input type="checkbox" checked> checked checkbox<br><br>
+    <input type="file">this is a input with the type= file<br><br>
+    <input type="image">this is a input with the type= image<br><br>
+    <input type="password">this is a input with the type= password<br><br>
+    <input type="radio" name="gender">radio button with name= gender<br><br>
+    <input type="reset">this is a input with the type= reset<br><br>
+    <select>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+    </select>
+    option selector<br><br>
+    <input type="submit"> input with type= submit<br><br>
+    <input type="text"> input with type= text<br><br>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

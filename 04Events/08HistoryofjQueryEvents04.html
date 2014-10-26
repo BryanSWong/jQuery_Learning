@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>History of jQuery Events</title>
+</head>
+<body>
+
+
+<div id="container">
+    <ul id="list">
+        <li>Item #1</li>
+        <li>Item #2</li>
+        <li>Item #3</li>
+        <li>...</li>
+        <li>Item #100</li>
+    </ul>
+</div>
+
+<h4>.live() w/ context (Deprecated)</h4>
+
+<p>
+Passing the context as a second optional argument to the $()
+function has been supported since v1.0. However support for using
+this context with the $.live() method was not added until v1.4.
+</p>
+
+If we were take our previous .live() example and provide it the <br>
+default context, it would look like:<br>
+
+$("#list li",document).live("click", function(event){<br>
+var elem = $(this);<br>
+console.log(elem.text());<br>
+});<br><br>
+
+Since we can override the context when using the .live() method, <br>
+we can specify a context that is closer to the element in the DOM hierarchy<br>
+<br>
+
+$("li","#list").live("click", function(event){<br>
+var elem = $(this);<br>
+console.log(elem.text());<br>
+});<br><br>
+
+<script>
+    $("li", "#list").live("click", function(event){
+        var elem = $(this);
+        console.log(elem.text());
+    });
+</script>
+
+<p>In this instance when an < li> is clicked the event still
+    bubbles all the way up the document tree as it did before.
+    However, our event handler is now bound to the parent < ul>
+    tag, so we do not have to wait for the event to bubble all
+    the way up to the document root.
+</p>
+
+this example does not work as it really has been deprecated.
+
+</body>
+</html>

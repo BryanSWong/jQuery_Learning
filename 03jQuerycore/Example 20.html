@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>The jQuery Object part 2</title>
+    <script>
+
+        $(document).ready(function(){
+
+            var headings = $("h1");
+
+            var allHeadings = $("h1");
+
+            alert(allHeadings.length);
+
+            var firstHeading = headings.eq(0).hide();
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+<h4>Getting Elements Into the jQuery Object</h4>
+
+When the jQuery function is invoked with a CSS selector, it will<br>
+return a jQuery object wrapping any element(s) that match this selector. <br>
+For instance, writing:<br><br>
+
+var headings = $("h1");<br><br>
+
+headings is now a jQuery element containing all the < h1> tags<br>
+already on the page. This can be verified by inspecting the .length<br>
+property of headings:<br><br>
+
+var allHeadings = $("h1");<br><br>
+
+alert(allHeadings.length);<br><br>
+
+Here are two headings:<br><br>
+
+<h1>first heading 1</h1>
+
+<h1>second heading 2</h1>
+
+
+if the page has more than one < h1> tag, this number will be <br>
+greater than one. If the page has no < h1> tags, the .length <br>
+property will be zero. Checking the .length property is <br>
+a common way to ensure that the selector successfully <br>
+matched one or more elements.<br><br>
+
+
+If the goal is to select only the first heading element, <br>
+another step is required. There are a number of ways to accomplish <br>
+this, but the most straight-forward is the .eq() function.<br>
+
+var headings = $("h1");<br><br>
+
+var firstHeading = headings.eq(0).hide;<br><br>
+
+just to show the selector works I added the .hide() action.<br><br>
+
+
+jQuery also has a method named .get() which provides a <br>
+related function. Instead of returning a jQuery-wrapped <br>
+DOM element, it returns the DOM element itself.<br><br>
+
+var firstHeadingElem = $("h1").get(0);<br><br>
+
+Alternatively, because the jQuery object is "array-like," <br>
+it supports array subscripting via brackets:<br><br>
+
+var firstHeadingElem = $( "h1" )[ 0 ];<br><br>
+
+
+</body>
+</html>

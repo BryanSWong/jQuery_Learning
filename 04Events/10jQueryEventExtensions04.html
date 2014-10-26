@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>jQuery Event Extensions</title>
+</head>
+<body>
+
+<h4>Example: Multiclick event</h4>
+<p>
+This multiclick special event maps itself into a standard click event,
+but uses a handle hook so that it can monitor the event and only deliver it when
+the user clicks on the element a multiple of the number of times specified during event binding.
+</p>
+<p>
+The hook stores the current click count in the data object, so multiclick
+handlers on different elements don't interfere with each other. It changes the
+event type to the original "multiclick" type before calling the handler and restores
+it to the mapped "click" type before returning:
+</p>
+
+jQuery.event.special.multiclick = {<br>
+delegateType: "click",<br>
+bindType: "click",<br>
+handle: function( event ) {<br>
+var handleObj = event.handleObj;<br>
+var targetData = jQuery.data( event.target );<br>
+var ret = null;<br><br>
+
+// If a multiple of the click count, run the handler<br>
+targetData.clicks = ( targetData.clicks || 0 ) + 1;<br><br>
+
+if ( targetData.clicks % event.data.clicks === 0 ) {<br>
+event.type = handleObj.origType;<br>
+ret = handleObj.handler.apply( this, arguments );<br>
+event.type = handleObj.type;<br>
+return ret;<br>
+}<br>
+}<br>
+};
+<br><br>
+// Sample usage<br>
+$( "p" ).on( "multiclick", {<br>
+clicks: 3<br>
+}, function( event ) {<br>
+alert( "clicked 3 times" );<br>
+});<br><br>
+
+
+<script>
+    jQuery.event.special.multiclick = {
+        delegateType: "click",
+        bindType: "click",
+        handle: function( event ) {
+            var handleObj = event.handleObj;
+            var targetData = jQuery.data( event.target );
+            var ret = null;
+
+            // If a multiple of the click count, run the handler
+            targetData.clicks = ( targetData.clicks || 0 ) + 1;
+
+            if ( targetData.clicks % event.data.clicks === 0 ) {
+                event.type = handleObj.origType;
+                ret = handleObj.handler.apply( this, arguments );
+                event.type = handleObj.type;
+                return ret;
+            }
+        }
+    };
+
+    // Sample usage
+    $( "p" ).on( "multiclick", {
+        clicks: 3
+    }, function( event ) {
+        alert( "clicked 3 times" );
+    });
+</script>
+
+</body>
+</html>

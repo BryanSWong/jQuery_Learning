@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Handling Events</title>
+</head>
+<body>
+
+
+Disconnecting Events
+
+<p>
+    Although all the fun of jQuery occurs in the .on() method,
+    it's counterpart is just as important if you want to be a
+    responsible developer. .off() cleans up that event binding
+    when you don't need it anymore. Complex user interfaces with
+    lots of event bindings can bog down browser performance, so
+    using the .off() method diligently is a best practice to
+    ensure that you only have the event bindings that you need,
+    when you need them.
+</p>
+
+Unbinding all click handlers on a selection<br><br>
+
+$("p").off("click");<br><br>
+
+Unbinding a particular click handler, using a reference to the function<br><br>
+
+var foo = function(){<br>
+console.log("foo");<br>
+};<br><br>
+
+var bar = function(){<br>
+console.log("bar");<br>
+};<br><br>
+
+$("p").on("click", foo).on("click", bar);<br><br>
+
+$("p").off("click", bar);<br><br>
+
+<p>Test paragraph</p>
+
+<script>
+    var foo = function(){
+        console.log("foo");
+    };
+
+    var bar = function(){
+        console.log("bar");
+    };
+
+    $("p").on("click", foo).on("click", bar);
+
+    $("p").off("click", bar);
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Understanding Event Delegation</title>
+</head>
+<body>
+
+<div id="container">
+    <ul id="list">
+        <li><a href="http://yahoo.com">Item #1</a></li>
+        <li><a href="http://google.com">Item #2</a></li>
+        <li><a href="http://bing.com">Item #3</a></li>
+        <li><a href="http://aol.com">Item #4</a></li>
+    </ul>
+</div>
+
+<h4>Using the Triggering Element</h4>
+
+<p>
+What if we wanted to open the link in a new window if that link is an
+    external one (as denoted here by beginning with "http")?
+</p>
+
+Example:<br><br>
+
+attach a delegated event<br>
+$("#list").on("click", "a", function(event){<br>
+var elem = $(this);<br>
+if(elem.is("[href^='http']")){<br>
+elem.attr("target","_blank");<br>
+}<br>
+});<br>
+
+<script>
+    $("#list").on("click", "a", function(event){
+        var elem = $(this);
+        if(elem.is("[href^='http']")){
+            elem.attr("target", "_blank");
+        }
+    })
+</script>
+
+
+<p>
+    This simply passes the .is() method a selector to see if the href
+    attribute of the element starts with "http". We have also removed
+    the event.preventDefault(); statement as we want the default action
+    to happen (which is to follow the href).
+</p>
+
+the changes made allow the link to open with the event handling to open the links in new pages.
+<br><br>
+We can actually simplify our code by allowing the selector parameter of .on() do our logic for us:
+<br><br>
+
+Example:
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Introducing Events</title>
+</head>
+<body>
+
+
+<p>
+    When utilizing both .preventDefault() and .stopPropagation()
+    simultaneously, you can instead return false to achieve both
+    in a more concise manner, but it's advisable to only return
+    false when both are actually necessary and not just for the
+    sake of terseness. A final note on .stopPropagation() is that
+    when using it in delegated events, the soonest that event
+    bubbling can be stopped is when the event reaches the element
+    that is delegating it.
+</p>
+
+<p>
+    It's also important to note that the event object contains
+    a property called originalEvent, which is the event object
+    that the browser itself created. jQuery wraps this native
+    event object with some useful methods and properties, but
+    in some instances, you'll need to access the original
+    event via event.originalEvent for instance. This is
+    especially useful for touch events on mobile devices
+    and tablets.
+</p>
+
+<p>
+    Finally, to inspect the event itself and see all of the
+    data it contains, you should log the event in the browser's
+    console using console.log. This will allow you to see all of
+    an event's properties (including the originalEvent) which
+    can be really helpful for debugging.
+</p>
+
+
+Logging an event's information<br><br>
+
+$("form").on("submit", function(event){<br>
+// Prevent the form's default submission.<br>
+event.preventDefault();<br>
+// Log the event object for inspecting<br>
+console.log(event);<br>
+});
+<br><br>
+
+<form>
+    First Name:<input type="text" name="fName"><br>
+    Last Name:<input type="text" name="lName"><br>
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    $("form").on("submit", function(event){
+        event.preventDefault();
+        console.log("event");
+    });
+</script>
+
+
+</body>
+</html>

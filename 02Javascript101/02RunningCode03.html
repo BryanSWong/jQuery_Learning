@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1 id="hello-world">Hello World</h1>
+
+<script>
+
+    //t is a common pattern to move scripts to the bottom of the page,
+    // prior to the closing HTML <body> tag. This will guarantee that elements are
+    // defined when the script is executed:
+
+    //Moving the script to the bottom of the page will make sure the element exists.
+    var title = document.getElementById("hello-world");
+    console.log(title);
+</script>
+
+</body>
+</html>

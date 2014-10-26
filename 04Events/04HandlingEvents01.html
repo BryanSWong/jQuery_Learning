@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Handling Events</title>
+</head>
+<body>
+
+<p>
+    jQuery provides a method .on() to respond to any event on the
+    selected elements. This is called an event binding. Although
+    .on() isn't the only method provided for event binding, it is
+    a best practice to use this for jQuery 1.7+.
+</p>
+
+Simple event binding<br><br>
+
+When any < p > tag is clicked, we expect to see "< p > was clicked"<br>
+$("p").on("click", function(){<br>
+console.log("< p> was clicked");<br>
+});<br>
+
+<p>Example paragraph</p>
+
+<script>
+    $("p").on("click", function(){
+        console.log("<p> was clicked");
+    });
+</script>
+
+
+
+</body>
+</html>

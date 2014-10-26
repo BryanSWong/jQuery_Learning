@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Working with Selections</title>
+    <script>
+        $(document).ready(function(){
+
+            $("h1").html("Hello world");
+
+            $("h1").html();
+
+            $("#content").find("h3").eq(2).html("new text for third h3");
+
+            $("#content2").find("h3").eq(2).html("new text for third h3")
+                    .end().eq(0).html("new text for first h3");
+
+
+
+
+
+        });
+    </script>
+
+</head>
+<body>
+
+This h1 header will be changed from: This is a h1 header<br>
+<h1>This is a h1 header</h1>
+
+The setter code did it:<br>
+
+$("h1").html("Hello world");<br><br>
+
+this is a getter code:<br>
+$("h1").html();
+<br><br>
+
+does not do anything yet till you add jQuery actions<br>
+right now it jsut gets the h1 element
+<br><br>
+
+<h4>Chaining</h4>
+
+If you call a method on a selection and that method returns a jQuery object,
+<br>
+you can continue to call jQuery methods on the object without pausing for <br>
+a semicolon. This practice is referred to as "chaining":<br>
+
+example:<br><br>
+
+$("#content").find("h3").eq(2).html("new text for third h3");<br><br>
+
+this happens to the following div with id = content.<br><br>
+
+<div id="content">
+
+    <h3>the first h3</h3>
+
+    <h3>The second h3</h3>
+
+    <h3>third h3</h3>
+
+    <h3>the 4th h3</h3>
+
+</div><br><br>
+
+It may help code readability to break the chain over several lines:<br><br>
+$("#content")<br>
+    .find("h3")<br>
+    .eq(2)<br>
+        .html("new text for third h3");<br>
+<br><br>
+
+jQuery also provides the .end() method to get back to the original<br>
+selection should you change the selection in the middle of a chain:<br><br>
+
+example on a div with id = content2:<br><br>
+
+$("#content2")<br>
+.find("h3")<br>
+.eq(2)<br>
+.html("new text for third h3")<br>
+.end()<br>
+.eq(0)<br>
+.html("new text for first h3");<br><br><br>
+
+<div id="content2">
+
+    <h3>the first h3</h3>
+
+    <h3>The second h3</h3>
+
+    <h3>third h3</h3>
+
+    <h3>the 4th h3</h3>
+
+</div><br><br>
+
+
+
+</body>
+</html>

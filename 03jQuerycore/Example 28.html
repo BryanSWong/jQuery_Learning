@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Using jQuery’s .index() Function part 1</title>
+    <script>
+
+        $(document).ready(function(){
+
+            var foo = $("#foo1");
+
+            console.log("Index "+ foo.index());
+
+            var listItem = $("li");
+
+            console.log("Index "+ listItem.index());
+            console.log("Index "+ listItem.first().index());
+
+            var div = $("div");
+
+            console.log("Index " + div.index());
+            console.log("Index " + div.first().index());
+
+
+
+        });
+
+    </script>
+</head>
+<body>
+
+
+.index() is a method on jQuery objects that's generally used to search<br>
+for a given element within the jQuery object that it's called on. This<br>
+method has four different signatures with different semantics that can<br>
+be confusing.<br><br>
+
+
+<h2>.index() with No Arguments</h2>
+
+The jQuery code:<br><br>
+
+var foo = $("#foo1");<br><br>
+
+console.log("Index " + foo.index());<br><br>
+
+var listItem = $("li");<br><br>
+
+This implicitly calls .first()<br>
+console.log("Index "+ listItem.index());<br>
+console.log("Index "+ listItem.first().index());<br><br>
+
+var div = $("div");<br><br>
+
+This implicitly calls .first()<br>
+console.log("Index " + div.index());<br>
+console.log("Index " + div.first().index());<br><br>
+
+
+<ul>
+    <div></div>
+    <li id="foo1">foo</li>
+    <li id="bar1">bar</li>
+    <li id="baz1">baz</li>
+    <div></div>
+</ul><br><br>
+
+Inspect the web page to see the results in console.<br><br>
+
+
+.index() gives the zero-based index of #foo1 within its parent. <br>
+Since #foo1 is the second child of its parent, index() returns 1.<br><br>
+
+When .index() is called on a jQuery object that contains more than <br>
+one element, it calculates the index of the first element.<br><br>
+
+
+
+</body>
+</html>

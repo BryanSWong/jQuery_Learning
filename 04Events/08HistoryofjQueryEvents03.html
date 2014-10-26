@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <script src="jquery.simulate.js"></script>
+    <title>History of jQuery Events</title>
+</head>
+<body>
+
+
+<div id="container">
+    <ul id="list">
+        <li>Item #1</li>
+        <li>Item #2</li>
+        <li>Item #3</li>
+        <li>...</li>
+        <li>Item #100</li>
+    </ul>
+</div>
+
+<h3>.live() (Deprecated)</h3>
+
+All .live() event handlers are bound to the document root by default.<br><br>
+
+Example:<br><br>
+
+$("#list li").live("click", function(event){<br>
+var elem = $(this);<br>
+console.log(elem.text());<br>
+});<br><br>
+
+<script>
+    $("#list li").live("click", function(event){
+        var elem = $(this);
+        console.log(elem.text());
+    });
+</script>
+
+When we use .live() our event is bound to $( document ). <br>
+When the < li > is clicked, bubbling occurs and our click event <br>
+is fired for each of the following elements:<br><br>
+
+    < ul ><br>
+    < div ><br>
+    < body ><br>
+    < html ><br>
+    document root<br><br>
+
+The last element to receive the click event is document,<br>
+this is where our .live() event is bound. .live() will then <br>
+check to see if our selector #list li is the element that <br>
+triggered the event, if so our event handler is executed.<br>
+<br>
+
+this example does not work as it really has been deprecated.
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>FAQ</title>
+    <script>
+
+        $(document).ready(function(){
+
+           var isVisible = $("#exp1").is(":visible");
+
+            console.log(isVisible + " elements visibility");
+
+            var isHidden = $("#exp2").is(":hidden");
+
+            console.log(isHidden + " elements visibility");
+
+
+
+
+        });
+
+    </script>
+</head>
+<body>
+
+<h2>How do I determine the state of a toggled element?</h2>
+
+You can determine whether an element is collapsed or not by using<br>
+the :visible and :hidden selectors.<br><br>
+
+the jQuery code:<br><br>
+
+var isVisible = $("#exp1").is(":visible");<br><br>
+
+var isHidden = $("#exp2").is(":hidden");<br><br><br>
+
+
+
+The visble div:<bR>
+<div id="exp1" style="visibility: visible">visible div</div>
+
+<br><br>
+
+the hidden div:<br>
+<div id="exp2" style="visibility: hidden">hidden div</div>
+
+you can inspect the web page to see the results in condole.
+
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Handling Events</title>
+</head>
+<body>
+
+Many events and handlers<br><br>
+
+<p>
+    Suppose that instead you want different event handlers
+    for when the mouse enters and leaves an element.
+    This is more common than the previous example.
+    For example, if you want to show and hide a tooltip
+    on hover, you would use this.
+</p>
+
+
+.on() accepts an object containing multiple events and handlers.<br><br>
+
+$("div").on({<br>
+mouseenter: function(){<br>
+console.log("hovered over a div");<br>
+},<br>
+mouseleave: function(){<br>
+console.log("mouse left a div");<br>
+},<br>
+click: function(){<br>
+console.log("clicked on a div");<br>
+}<br>
+});<br>
+<br>
+
+<div>Example div</div>
+
+<script>
+    $("div").on({
+        mouseenter: function(){
+            console.log("hovered over a div");
+        },
+        mouseleave: function(){
+            console.log("mouse left a div");
+        },
+        click: function(){
+            console.log("clicked on a div")
+        }
+    });
+</script>
+
+</body>
+</html>

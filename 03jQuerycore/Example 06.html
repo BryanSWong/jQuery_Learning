@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="prototype.js"></script>
+    <script src="jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Avoiding Conflicts with Other Libraries part 1</title>
+
+    <script>
+        var $j = jQuery.noConflict();
+        // $j is now an alias to the jQuery function;
+        // creating the new alias is optional.
+
+        $j(document).ready(function(){
+            $j("div").hide();
+        });
+
+        // The $ variable now has the prototype meaning,
+        // which is a shortcut for
+        // document.getElementById(). mainDiv below is a
+        // DOM element, not a jQuery object.
+        window.onload = function() {
+            var mainDiv = $("main");
+        };
+
+    </script>
+
+    <style>
+        div{
+            border-style: solid;
+            border-width: 5px;
+        }
+    </style>
+
+</head>
+<body>
+
+<h3>Putting jQuery Into No-Conflict Mode</h3>
+When you put jQuery into no-conflict mode, you have the option of <br>
+assigning a new variable name to replace the $ alias.
+
+<p>There is suppose to be a div below but the code hides it.</p>
+
+<div><p>This is a div with a 5px border.</p></div>
+
+The code looks like:<br>
+
+< script src="prototype.js">< /script><br>
+< script src="jquery.js"> < /script><br><br>
+
+< script><br><br>
+
+var $j = jQuery.noConflict();<br><br>
+// $j is now an alias to the jQuery function;<br>
+// creating the new alias is optional.<br><br>
+
+$j(document).ready(function(){<br>
+$j("div").hide();<br>
+});<br><br>
+
+// The $ variable now has the prototype meaning,<br>
+// which is a shortcut for<br>
+// document.getElementById(). mainDiv below is a<br>
+// DOM element, not a jQuery object.<br><br>
+
+window.onload = function() {<br>
+var mainDiv = $("main");<br><br>
+
+< script><br>
+
+</body>
+</html>

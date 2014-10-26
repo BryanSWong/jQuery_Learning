@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Understanding Event Delegation</title>
+</head>
+<body>
+
+<p>Event delegation allows us to attach a single event listener,
+    to a parent element, that will fire for all descendants matching
+    a selector, whether those descendants exist now or are added
+    in the future.</p>
+
+
+<div id="container">
+    <ul id="list">
+        <li><a href="http://domain1.com">Item #1</a></li>
+        <li><a href="http://domain2.com">Item #2</a></li>
+        <li><a href="http://domain3.com">Item #3</a></li>
+        <li><a href="http://domain4.com">Item #4</a></li>
+    </ul>
+</div>
+
+
+<p>When an anchor in our #list group is clicked, we want to
+    log its text to the console. Normally we could directly
+    bind to the click event of each anchor using the .on()
+    method:</p>
+
+<p>While this works perfectly fine, there are drawbacks.
+    Consider what happens when we add a new anchor after
+    having already bound the above listener:</p>
+
+Example:<br>
+$("#list").append("< li >< a href='http://newdomain.com'>Item #5< / a>< / li>");<br><br>
+
+<p>If we were to click our newly added item, nothing would happen.
+    This is because of the directly bound event handler that we
+    attached previously. Direct events are only attached to
+    elements at the time the .on() method is called. In this case,
+    since our new anchor did not exist when .on() was called, it
+    does not get the event handler.</p>
+
+eg: will go to page while the others have the event handler prevent event default and console.log event.
+
+<script>
+    $("#list a").on("click", function(event){
+        event.preventDefault();
+        console.log($(this).text());
+    });
+
+</script>
+
+<script>
+    $("#list").append("<li><a href='http://newdomain.com'>Item #5</a></li>");
+</script>
+
+
+</body>
+</html>

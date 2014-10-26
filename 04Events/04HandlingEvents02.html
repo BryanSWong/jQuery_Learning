@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Handling Events</title>
+</head>
+<body>
+
+Many events, but only one event handler<br><br>
+<p>
+    Suppose you want to trigger the same event whenever the
+    mouse hovers over or leaves the selected elements.
+    The best practice for this is to use "mouseenter mouseleave".
+    Note the difference between this and the next example.
+</p>
+
+When a user focuses on or changes any input element, <br>
+we expect a console message bind to multiple events<br><br>
+
+$("div").on("mouseenter mouseleave", function(){<br>
+console.log("mouse hovered over or left a div");<br>
+});<br>
+<br>
+
+<div>Example div</div>
+
+<script>
+    $("div").on("mouseenter mouseleave", function(){
+        console.log("mouse hovered over or left a div");
+    });
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

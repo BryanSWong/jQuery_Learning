@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>The jQuery Object part 3</title>
+    <script>
+
+        $(document).ready(function(){
+
+            var logo1 = $("#logo");
+            var logo2 = $("#logo");
+
+            alert($("#logo") === $("#logo"));
+
+            var logo1Elem = logo1.get(0);
+            var logo2Elem = logo2.get(0);
+
+            alert(logo1Elem === logo2Elem);
+
+            var $logo1 = $("#logo");
+            logo1 = $logo1.get(0);
+
+            var $logo2 = $("#logo");
+
+            logo2 = $logo2.get(0);
+
+            alert(logo1 === logo2);
+
+            var allParagraphs = $("p");
+
+            allParagraphs = $("p");
+
+
+
+        });
+
+    </script>
+</head>
+<body>
+
+<h3>Not All jQuery Objects are Created ===</h3>
+
+An important detail regarding this "wrapping" behavior is <br>
+that each wrapped object is unique. This is true even if the <br>
+object was created with the same selector or contain references <br>
+to the exact same DOM elements.<br><br>
+
+
+Creating two jQuery objects for the same element.<br>
+var logo1 = $("#logo");<br>
+var logo2 = $("#logo");<br><br>
+
+
+Comparing jQuery objects.<br>
+alert($("#logo") === $("#logo")); alerts "false"<br><br>
+
+However, both objects contain the same DOM element. <br>
+The .get() method is useful for testing if two jQuery <br>
+objects have the same DOM element.<br><br>
+
+
+var logo1Elem = logo1.get(0);<br>
+var logo2Elem = logo2.get(0);<br><br>
+
+alert(logo1Elem === logo2Elem); alerts "true" <br><br>
+
+
+Many developers prefix a $ to the name of variables that <br>
+contain jQuery objects in order to help differentiate.<br><br>
+
+
+var $logo1 = $("#logo");<br>
+logo1 = $logo1.get(0);<br><br>
+
+var $logo2 = $("#logo");<br><br>
+
+logo2 = $logo2.get(0);<br><br>
+
+alert(logo1 === logo2); alerts "true"<br><br>
+
+
+<h3>jQuery Objects Are Not "Live"</h3>
+
+Given a jQuery object with all the paragraph elements on the page:<br><br>
+
+Selecting all < p> elements on the page.<br>
+var allParagraphs = $("p");<br><br>
+
+Updating the selection.<br>
+allParagraphs = $("p");<br><br>
+
+
+
+</body>
+</html>

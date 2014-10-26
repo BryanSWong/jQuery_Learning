@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>History of jQuery Events</title>
+</head>
+<body>
+
+<div id="container">
+    <ul id="list">
+        <li>Item #1</li>
+        <li>Item #2</li>
+        <li>Item #3</li>
+        <li>...</li>
+        <li>Item #100</li>
+    </ul>
+</div>
+
+
+<h4>.on()</h4>
+
+<p>
+The .on() method gives us a semantic approach for creating directly
+    bound events as well as delegated events. It eliminates the need
+    to use the deprecated .bind(), .live(), and .delegate() methods,
+    providing a single API for creating events.
+</p>
+
+$("#list").on("click", "li", function(event){<br>
+var elem = $(this);<br>
+console.log(elem.text());
+});<br><br>
+
+<script>
+    $("#list").on("click", "li", function(event){
+        var elem =$(this);
+        console.log(elem.text());
+    });
+</script>
+
+<p>
+All of these ways of event delegation were innovative and considered a best
+practice at the time of their release. Depending on what version of jQuery
+you have implemented use the appropriate means of event delegation.
+
+</p>
+
+
+</body>
+</html>

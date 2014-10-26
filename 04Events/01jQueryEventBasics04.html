@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>jQuery Event Basics</title>
+</head>
+<body>
+
+<h5>Inside the Event Handler Function</h5>
+
+<p>
+Every event handling function receives an event object, which contains many properties
+and methods. The event object is most commonly used to prevent the default action of
+the event via the .preventDefault() method. However, the event object contains a
+number of other useful properties and methods, including:
+</p>
+
+link pageX, pageY<br><br>
+
+The mouse position at the time the event occurred, <br>
+relative to the top left corner of the page display area (not the entire browser window).<br><br>
+
+link type<br><br>
+
+The type of the event (e.g. "click").<br><br>
+
+link which The button or key that was pressed.<br><br>
+
+link data<br><br>
+
+Any data that was passed in when the event was bound. For example:<br><br>
+
+Event setup using the '.on()' method with data<br><br>
+
+$("input").on(
+"change",<br>
+{foo: "bar"}, // associate data with event binding<br>
+function(eventObject){<br>
+console.log("An input value was changed! " , eventObject.data.foo);<br>
+}<br>
+);<br><br>
+
+<form>
+    Input:<input type="text" name="input" value="">
+</form>
+
+<script src="jquery.js"></script>
+<script>
+
+    $("input").on("change",
+    {foo: "bar"},
+    function(eventObject){
+        console.log("An input value was changed! ", eventObject.data.foo);
+    }
+    );
+
+
+</script>
+
+</body>
+</html>

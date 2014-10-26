@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>jQuery Event Basics</title>
+
+    <script>
+        $(document).ready(function(){
+            $("button.alert").on("click", function(){
+                console.log("A button with the add class was clicked!");
+            });
+
+            $("button").addClass("alert").appendTo(document.body);
+        });
+    </script>
+
+</head>
+<body>
+
+<h5>Extending Events to New Page Elements</h5>
+
+<p>
+It is important to note that .on() can only create event listeners on elements
+that exist at the time you set up the listeners. Similar elements created after
+the event listeners are established will not automatically pick up event
+behaviors you've set up previously. For example:
+</p>
+
+$(document).ready(function(){<br>
+// Sets up click behavior on all button elements with the alert class<br>
+// that exist in the DOM when the instruction was executed<br>
+$("button.alert").on("click",function(){<br>
+console.log("A button with the alert class was clicked!");<br>
+});<br>
+// Now create a new button element with the alert class. This button<br>
+// was created after the click listeners were applied above, so it<br>
+// will not have the same click behavior as its peers<br>
+$("button").addClass("alert").appendTo(document.body);<br>
+});<br><br>
+
+<button class ="alert">example button</button>
+
+<button>other example button</button>
+
+
+
+
+</body>
+</html>

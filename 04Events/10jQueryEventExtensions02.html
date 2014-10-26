@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>jQuery Event Extensions</title>
+</head>
+<body>
+
+<h4>bindType: String, delegateType: String</h4>
+
+<p>
+When defined, these string properties specify that a special event should
+    be handled like another event type until the event is delivered.
+    The bindType is used if the event is attached directly, and the delegateType
+    is used for delegated events. These types are generally DOM event types,
+    and should not be a special event themselves.
+</p>
+
+The behavior of these properties is easiest to see with an example. Assume a special event defined as follows:<br><br>
+
+jQuery.event.special.pushy = {<br>
+bindType: "click",<br>
+delegateType: "click"<br>
+};<br><br>
+
+<script>
+    jQuery.event.special.pushy = {
+        bindType: "click",
+        delegateType: "click"
+    };
+</script>
+
+So given the special event above, this code shows that a pushy isn't removed <br>
+by removing clicks. That might be an effective way to defend against an ill-behaved <br>
+plugin that didn't namespace its removal of click events, for example:<br><br>
+
+var elem = $( "p" );<br><br>
+
+elem.on( "click", function( event ) {<br>
+$( "body" ).append( "I am a " + event.type + "!" );<br>
+});<br><br>
+
+elem.on( "pushy", function( event ) {<br>
+$( "body" ).append( "I am pushy but still a " + event.type + "!" );<br><br>
+});
+
+elem.trigger( "click" ); // triggers both handlers<br><br>
+
+elem.off( "click" );<br><br>
+
+elem.trigger( "click" ); // still triggers "pushy"<br><br>
+
+elem.off( "pushy" );<br><br>
+
+<script>
+    var elem = $( "p" );
+
+    elem.on( "click", function( event ) {
+        $( "body" ).append( "I am a " + event.type + "!" );
+    });
+
+    elem.on( "pushy", function( event ) {
+        $( "body" ).append( "I am pushy but still a " + event.type + "!" );
+    });
+
+    elem.trigger( "click" ); // triggers both handlers
+
+    elem.off( "click" );
+
+    elem.trigger( "click" ); // still triggers "pushy"
+
+    elem.off( "pushy" );
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Handling Events</title>
+</head>
+<body>
+
+Passing data to the event handler<br><br>
+
+You can pass your own data to the event object.<br><br>
+
+$("p").on("click",<br>
+foo: "bar"<br>
+}, function(event){<br>
+console.log("event data: " + event.data.foo + " (should be 'bar')");<br>
+});<br>
+<br>
+
+<p>test paragraph</p>
+
+<script>
+    $("p").on("click",{
+    foo: "bar"
+    }, function(event){
+        console.log("event data: " + event.data.foo + " (should be 'bar'");
+    });
+</script>
+
+
+</body>
+</html>

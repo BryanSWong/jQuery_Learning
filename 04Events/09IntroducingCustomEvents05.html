@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Introducing Custom Events part 4</title>
+</head>
+<body>
+
+<h4>A Sample Application</h4>
+<p>
+To demonstrate the power of custom events, we're going to
+    create a simple tool for searching Twitter. The tool will
+    offer several ways for a user to add search terms to the display:
+    by entering a search term in a text box, by entering multiple search
+    terms in the URL, and by querying Twitter for trending terms.
+</p>
+
+The results for each term will be shown in a results container; <br>
+these containers will be able to be expanded, collapsed, refreshed, <br>
+and removed, either individually or all at once.<br>
+<br>
+
+
+Example html:<br><br>
+
+< h1>Twitter Search< /h1><br>
+< input type="button" id="get_trends" value="Load Trending Terms"/><br><br>
+
+< form><br>
+    < input type="text" class="input_text" id="search_term"/><br>
+    < input type="submit" class="input_submit" value="Add Search Term"/><br>
+< /form><br><br>
+
+< div id="twitter"><br>
+    < div class="template results"><br>
+        < h2>Search Results for<br>
+            < span class="search_term">< /span>< /h2><br>
+    < /div><br>
+< /div>
+<br><br>
+
+Example script:<br><br>
+
+
+$.fn.twitterResult = function(setting){<br>
+return this.each(function(){<br>
+var results = $(this);<br>
+var actions = $.fn.twitterResult.actions =<br>
+$.fn.twitterResult.actions || $.fn.twitterResult.createActions();<br>
+var a = actions.clone().prependTo(results);<br>
+var term = setting.term;<br>
+
+results.find("span.search_term").text(term);<br>
+$.each(["refresh", "populate", "remove", "collapse", "expand"], function(i, ev){<br>
+results.on(ev, {<br>
+term: term<br>
+}, $.fn.twitterResult.events[ev]);<br>
+});<br><br>
+
+// use the class of each action to figure out<br>
+// which event it will trigger on the results panel<br>
+a.find("li").click(function(){<br>
+// pass the li that was clicked to the function<br>
+// so it can be manipulated if needed<br>
+results.trigger($(this).attr("class"),[$(this)]);<br>
+});<br>
+});<br>
+};<br><br>
+
+$.fn.twitterResult.createActions = function(){<br>
+return $("< ul class='actions' />").append(<br>
+"< li class='refresh'>Refresh< /li>"+<br>
+"< li class='remove'>Remove< /li>"+<br>
+"< li class='collapse'>Collapse< /li>"<br>
+);<br>
+};<br><br>
+
+$.fn.twitterResult.events = {<br>
+refresh: function(e){<br>
+// indicate that the results are refreshing<br>
+var elem = $(this).addClass("refreshing");<br><br>
+
+elem.find("p.tweet").remove();<br>
+results.append("< p class='loading'>Loading...< /p>");<br><br>
+
+// get the twitter data using jsonp<br>
+$.getJSON("http://search.twitter.com/search.json?q" + escape(e.data.term)<br>
++ "&rpp=5&callback=?", function(json){<br>
+elem.trigger("populate", [json]);<br>
+});<br>
+},<br><br>
+
+populate: function(e, json){<br>
+var results = json.results;<br>
+var elem = $(this);<br><br>
+
+elem.find("p.loading").remove();<br>
+$.each(results, function(i, result){<br>
+var tweet = "< p class='tweet'>"+<br>
+    "< a href='http://twitter.com/'" + result.from_user +<br>
+    "'>" +<br>
+    result.from_user +<br>
+    "< /a>" +<br>
+    result.text +<br>
+    " < span class='date'>" +<br>
+                result.created_at +<br>
+                "< /span>" +<br>
+    "< /p>";<br><br>
+
+elem.append(tweet);<br>
+});<br><br>
+
+elem.removeClass("refreshing");<br>
+},<br><br>
+
+remove: function(e, force){<br>
+if(!force && !confirm("Remove panel for term " + e.data.term + "?")){<br>
+return;<br>
+}<br>
+$(this).remove();<br><br>
+
+// indicate that we no longer have a panel for the term<br>
+search_terms[e.data.term] = 0;<br>
+},<br><br>
+
+collapse: function(e) {<br>
+$(this).find("li.collapse").removeClass("collapse").addClass("expand").text("Expand");<br><br>
+
+$(this).addClass("collapsed");<br>
+},<br><br>
+
+expand: function(e){<br>
+$(this).find("li.expand").removeClass("expand").addClass("collapse").text("Collapse");<br><br>
+
+$(this).removeClass("collapsed");<br>
+}<br>
+};<br><br>
+
+Here's Twitter container bindings look:<br><br>
+
+$( "#twitter" ).on( "getResults", function( e, term ) {<br>
+// make sure we don't have a box for this term already<br>
+if ( !search_terms[ term ] ) {<br>
+var elem = $( this );<br>
+var template = elem.find( "div.template" );<br><br>
+
+// make a copy of the template div<br>
+// and insert it as the first results <br>
+results = template.clone()<br>
+.removeClass( "template" )<br>
+.insertBefore( elem.find( "div:first" ) )<br>
+.twitterResult({<br>
+"term": term<br>
+});<br><br>
+
+// load the content using the "refresh"<br>
+// custom event that we bound to the results container<br>
+results.trigger( "refresh" );<br><br>
+
+search_terms[ term ] = 1;<br>
+}<br>
+}).on( "getTrends", function( e ) {<br>
+var elem = $( this );<br><br>
+
+$.getJSON( "http://search.twitter.com/trends.json?callback=?", function( json ) {<br>
+var trends = json.trends;<br>
+$.each( trends, function( i, trend ) {<br>
+elem.trigger( "getResults", [ trend.name ] );<br>
+});<br>
+});<br>
+});<br><br>
+
+
+
+
+<p>
+So far, we've written a lot of code that does approximately nothing, but that's OK.
+    By specifying all the behaviors that we want our core objects to have, we've
+    created a solid framework for rapidly building out the interface.
+</p>
+<p>
+Let's start by hooking up our text input and the "Load Trending Terms"
+    button. For the text input, we'll capture the term that was entered in the input
+    and pass it as we trigger the Twitter container's getResults event. Clicking
+    the "Load Trending Terms" will trigger the Twitter container's getTrends event:
+</p>
+
+$( "form" ).submit(function( event ) {<br>
+var term = $( "#search_term" ).val();<br>
+$( "#twitter" ).trigger( "getResults", [ term ] );<br>
+event.preventDefault();<br>
+});<br><br>
+
+$( "#get_trends" ).click(function() {<br>
+$( "#twitter" ).trigger( "getTrends" );<br>
+});<br><br>
+
+
+
+<p>
+    By adding a few buttons with the appropriate ID's, we can make it possible
+    to remove, collapse, expand, and refresh all results containers at once, as shown
+    below. For the remove button, note how we're passing a value of true to the event
+    handler as its second argument, telling the event handler that we don't want to
+    verify the removal of individual containers.
+</p>
+
+$.each([ "refresh", "expand", "collapse" ], function( i, ev ) {<br>
+$( "#" + ev ).click( function( e ) {<br>
+$( "#twitter div.results" ).trigger( ev );<br>
+});<br>
+});<br><br>
+
+$( "#remove" ).click(function( e ) {<br>
+if ( confirm( "Remove all results?" ) ) {<br>
+$( "#twitter div.results" ).trigger( "remove", [ true ] );<br>
+}<br>
+});<br><br>
+
+
+Example twitter in action:<br><br>
+
+<h1>Twitter Search</h1>
+<input type="button" id="get_trends" value="Load Trending Terms"/>
+
+<form>
+    <input type="text" class="input_text" id="search_term"/>
+    <input type="submit" class="input_submit" value="Add Search Term"/>
+</form>
+
+<div id="twitter">
+    <div class="template results">
+        <h2>Search Results for
+            <span class="search_term"></span></h2>
+    </div>
+</div>
+
+<script>
+
+    $.fn.twitterResult = function( settings ) {
+        return this.each(function() {
+            var results = $( this );
+            var actions = $.fn.twitterResult.actions =
+                    $.fn.twitterResult.actions || $.fn.twitterResult.createActions();
+            var a = actions.clone().prependTo( results );
+            var term = settings.term;
+
+            results.find( "span.search_term" ).text( term );
+            $.each([ "refresh", "populate", "remove", "collapse", "expand" ], function( i, ev ) {
+                results.on( ev, {
+                    term: term
+                }, $.fn.twitterResult.events[ ev ] );
+            });
+
+            // use the class of each action to figure out
+            // which event it will trigger on the results panel
+            a.find( "li" ).click(function() {
+                // pass the li that was clicked to the function
+                // so it can be manipulated if needed
+                results.trigger( $( this ).attr( "class" ), [ $( this ) ] );
+            });
+        });
+    };
+
+    $.fn.twitterResult.createActions = function() {
+        return $( "<ul class='actions' />" ).append(
+                        "<li class='refresh'>Refresh</li>" +
+                        "<li class='remove'>Remove</li>" +
+                        "<li class='collapse'>Collapse</li>"
+        );
+    };
+
+    $.fn.twitterResult.events = {
+
+        refresh: function( e ) {
+            // indicate that the results are refreshing
+            var elem = $( this ).addClass( "refreshing" );
+
+            elem.find( "p.tweet" ).remove();
+            results.append( "<p class='loading'>Loading...</p>" );
+
+            // get the twitter data using jsonp
+            $.getJSON( "http://search.twitter.com/search.json?q=" + escape( e.data.term )
+                    + "&rpp=5&callback=?", function( json ) {
+                elem.trigger( "populate", [ json ] );
+            });
+        },
+
+        populate: function( e, json ) {
+            var results = json.results;
+            var elem = $( this );
+
+            elem.find( "p.loading" ).remove();
+            $.each( results, function( i, result ) {
+                var tweet = "<p class='tweet'>" +
+                        "<a href='http://twitter.com/" +
+                        result.from_user +
+                        "'>" +
+                        result.from_user +
+                        "</a>: " +
+                        result.text +
+                        " <span class='date'>" +
+                        result.created_at +
+                        "</span>" +
+                        "</p>";
+
+                elem.append( tweet );
+            });
+
+            // indicate that the results are done refreshing
+            elem.removeClass("refreshing");
+        },
+
+        remove: function( e, force ) {
+            if ( !force && !confirm( "Remove panel for term " + e.data.term + "?" ) ) {
+                return;
+            }
+            $( this ).remove();
+
+            // indicate that we no longer have a panel for the term
+            search_terms[ e.data.term ] = 0;
+        },
+
+        collapse: function( e ) {
+            $( this ).find( "li.collapse" )
+                    .removeClass( "collapse" )
+                    .addClass( "expand" )
+                    .text( "Expand" );
+
+            $( this ).addClass( "collapsed" );
+        },
+
+        expand: function( e ) {
+            $( this ).find( "li.expand" )
+                    .removeClass( "expand" )
+                    .addClass( "collapse" )
+                    .text( "Collapse" );
+
+            $( this ).removeClass( "collapsed" );
+        }
+
+    };
+
+    $( "#twitter" ).on( "getResults", function( e, term ) {
+        // make sure we don't have a box for this term already
+        if ( !search_terms[ term ] ) {
+            var elem = $( this );
+            var template = elem.find( "div.template" );
+
+            // make a copy of the template div
+            // and insert it as the first results box
+            results = template.clone()
+                    .removeClass( "template" )
+                    .insertBefore( elem.find( "div:first" ) )
+                    .twitterResult({
+                        "term": term
+                    });
+
+            // load the content using the "refresh"
+            // custom event that we bound to the results container
+            results.trigger( "refresh" );
+
+            search_terms[ term ] = 1;
+        }
+    }).on( "getTrends", function( e ) {
+        var elem = $( this );
+
+        $.getJSON( "http://search.twitter.com/trends.json?callback=?", function( json ) {
+            var trends = json.trends;
+            $.each( trends, function( i, trend ) {
+                elem.trigger( "getResults", [ trend.name ] );
+            });
+        });
+    });
+
+    $.each([ "refresh", "expand", "collapse" ], function( i, ev ) {
+        $( "#" + ev ).click( function( e ) {
+            $( "#twitter div.results" ).trigger( ev );
+        });
+    });
+
+    $( "#remove" ).click(function( e ) {
+        if ( confirm( "Remove all results?" ) ) {
+            $( "#twitter div.results" ).trigger( "remove", [ true ] );
+        }
+    });
+
+</script>
+
+
+</body>
+</html>

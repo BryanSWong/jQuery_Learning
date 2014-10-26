@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>types</title>
+</head>
+<body>
+
+<script>
+
+    // Checking the type of an arbitrary value.
+
+    var myValue = [ 1, 2, 3 ];
+
+    // Using JavaScript's typeof operator to test for primitive types:
+    typeof myValue === "string"; // false
+    typeof myValue === "number"; // false
+    typeof myValue === "undefined"; // false
+    typeof myValue === "boolean"; // false
+
+    // Using strict equality operator to check for null:
+    myValue === null; // false
+
+    // Using jQuery's methods to check for non-primitive types:
+    jQuery.isFunction( myValue ); // false
+    jQuery.isPlainObject( myValue ); // false
+    jQuery.isArray( myValue ); // true
+</script>
+
+</body>
+</html>

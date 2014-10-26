@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Introducing Events</title>
+</head>
+<body>
+
+<p>
+    If the element has default functionality for a specific event
+    (like a link opens a new page, a button in a form submits the
+    form, etc.), that default functionality can be cancelled.
+    This is often useful for AJAX requests. When a user clicks
+    on a button to submit a form via AJAX, we'd want to cancel
+    the button/form's default action (to submit it to the form's
+    action attribute), and we would instead do an AJAX request to
+    accomplish the same task for a more seamless experience. To do
+    this, we would utilize the event object and call its .preventDefault()
+    method. We can also prevent the event from bubbling up the DOM tree
+    using .stopPropagation() so that parent elements aren't notified
+    of its occurrence (in the case that event delegation is being used).
+</p>
+
+Preventing a default action from occurring and stopping the event bubbling<br><br>
+
+$("form").on("submit", function(event){<br>
+// Prevent the form's default submission.<br>
+event.preventDefault();<br>
+// Prevent event from bubbling up DOM tree, prohibiting delegation<br>
+event.stopPropation();<br>
+// Make an AJAX request to submit the form data<br>
+});<br><br>
+
+<form>
+    First Name:<input type="text" name="fName"><br>
+    Last Name:<input type="text" name="lName"><br>
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    $("form").on("submit", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        alert("action check");
+        console.log("action check");
+    });
+</script>
+
+
+</body>
+</html>

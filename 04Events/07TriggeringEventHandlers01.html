@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Triggering Event Handlers</title>
+</head>
+<body>
+
+<h4>What handlers can be .trigger()'d?</h4>
+
+<p>
+jQuery's event handling system is a layer on top of native browser events.
+    When an event handler is added using .on( "click", function() {...} ),
+    it can be triggered using jQuery's .trigger( "click" ) because jQuery
+    stores a reference to that handler when it is originally added.
+    Additionally, it will trigger the JavaScript inside the onclick
+    attribute. The .trigger() function cannot be used to mimic native
+    browser events, such as clicking on a file input box or an anchor
+    tag. This is because, there is no event handler attached using
+    jQuery's event system that corresponds to these events.
+</p>
+
+Example:<br><br>
+
+<a href="http://learn.jquery.com">Learn JQuery</a> A Link
+
+<br><br>
+Script:<br><br>
+this will not change the current page<br>
+$("a").trigger("click");<br><br>
+
+this link still works as its a proper link.
+
+
+<script>
+    $("a").trigger("click");
+</script>
+
+</body>
+</html>

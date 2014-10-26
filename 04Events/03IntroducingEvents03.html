@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Introducing Events</title>
+</head>
+<body>
+
+
+var helloBtn = document.getElementById("helloBtn");<br><br>
+
+helloBtn.addEventListener("click", function(event){<br>
+alert("Hello.");<br>
+}, false);<br><br>
+
+<p>
+    Here we're saving a reference to the button element by
+    calling getElementById and assigning its return value
+    to a variable. We then call addEventListener and provide
+    an event handler function that will be called whenever
+    that event occurs. While there's nothing wrong with this
+    code as it will work fine in modern browsers, it won't
+    fare well in versions of IE prior to IE9. This is because
+    Microsoft chose to implement a different method,
+    attachEvent, as opposed to the W3C standard addEventListener,
+    and didn't get around to changing it until IE9 was released.
+    For this reason, it's beneficial to utilize jQuery because
+    it abstracts away browser inconsistencies, allowing developers
+    to use a single API for these types of tasks, as seen below.
+</p>
+
+Event binding using a convenience method<br>
+
+$("#helloBtn").click(function(event){<br>
+alert("Hello");<br>
+});<br><br>
+
+<button id="helloBtn">Say hello</button><br><br>
+
+
+<script>
+    $("#helloBtn").click(function(event){
+       alert("Hello");
+    });
+</script>
+
+
+
+
+</body>
+</html>

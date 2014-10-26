@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>jQuery Event Extensions</title>
+</head>
+<body>
+
+
+<h4>jQuery.event.fixHooks: Object</h4>
+
+<p>
+The fixHooks interface provides a per-event-type way to extend or
+    normalize the event object that jQuery creates when it processes a
+    native browser event. A fixHooks entry is an object that has two
+    properties, each being optional:
+</p>
+
+<p>
+props: Array: Strings representing properties that should be copied
+    from the browser's event object to the jQuery event object. If omitted,
+    no additional properties are copied beyond the standard ones that jQuery
+    copies and normalizes (e.g. event.target and event.relatedTarget).
+</p>
+
+<p>
+filter: Function( event, originalEvent ): jQuery calls this function after
+    it constructs the jQuery.Event object, copies standard properties from
+    jQuery.event.props, and copies the fixHooks-specific props (if any) specified
+    above. The function can create new properties on the event object or modify
+    existing ones. The second argument is the browser's native event object, which
+    is also available in event.originalEvent.
+</p>
+
+<p>
+Note that for all events, the browser's native event object is available in
+    event.originalEvent; if the jQuery event handler examines the properties there
+    instead of jQuery's normalized event object, there is no need to create a
+    fixHooks entry to copy or modify the properties.
+</p>
+<p>
+For example, to set a hook for the "drop" event that copies the dataTransfer
+    property, assign an object to jQuery.event.fixHooks.drop:
+</p>
+
+Example script:<br><br>
+
+jQuery.event.fixHooks.drop = {<br>
+props: [ "dataTransfer" ]<br>
+};<br><br>
+
+<script>
+    jQuery.event.fixHooks.drop = {
+        props: [ "dataTransfer" ]
+    };
+</script>
+
+<p>
+Since fixHooks is an advanced feature and rarely used externally,
+    jQuery does not include code or interfaces to deal with conflict
+    resolution. If there is a chance that some other code may be assigning
+    fixHooks to the same events, the code should check for an existing hook
+    and take appropriate measures. A simple solution might look like this:
+</p>
+
+
+if ( jQuery.event.fixHooks.drop ) {<br>
+throw new Error( "Someone else took the jQuery.event.fixHooks.drop hook!" );<br>
+}<br><br>
+
+jQuery.event.fixHooks.drop = {<br>
+props: [ "dataTransfer" ]<br>
+};<br><br>
+
+<script>
+    if ( jQuery.event.fixHooks.drop ) {
+        throw new Error( "Someone else took the jQuery.event.fixHooks.drop hook!" );
+    }
+
+    jQuery.event.fixHooks.drop = {
+        props: [ "dataTransfer" ]
+    };
+</script>
+
+<p>
+    When there are known cases of different plugins wanting to attach
+    to the drop hook, this solution might be more appropriate:
+</p>
+
+var existingHook = jQuery.event.fixHooks.drop;<br><br>
+
+if ( !existingHook ) {<br>
+jQuery.event.fixHooks.drop = {<br>
+props: [ "dataTransfer" ]<br>
+};<br>
+} else {<br>
+if ( existingHook.props ) {<br>
+existingHook.props.push( "dataTransfer" );<br>
+} else {<br>
+existingHook.props = [ "dataTransfer" ];<br>
+}<br>
+}<br><br>
+
+
+<script>
+
+    var existingHook = jQuery.event.fixHooks.drop;
+
+    if ( !existingHook ) {
+        jQuery.event.fixHooks.drop = {
+            props: [ "dataTransfer" ]
+        };
+    } else {
+        if ( existingHook.props ) {
+            existingHook.props.push( "dataTransfer" );
+        } else {
+            existingHook.props = [ "dataTransfer" ];
+        }
+    }
+
+</script>
+
+</body>
+</html>

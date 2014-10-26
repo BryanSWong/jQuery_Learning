@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Introducing Events</title>
+</head>
+<body>
+
+<p>
+    To accomplish the desired task unobtrusively, let's change
+    our HTML a little bit by removing the onclick attribute
+    and replacing it with an id, which we'll utilize to
+    "hook onto" the button from within a script file.
+</p>
+
+< button id="helloBtn" > Say hello < / button>
+
+<br><br>
+
+<button id="helloBtn">Say hello</button><br><br>
+
+var helloBtn = document.getElementById("helloBtn");<br><br>
+
+helloBtn.addEventListener("click", function(event){<br>
+alert("Hello.");<br>
+}, false);<br><br>
+
+<script>
+    var helloBtn = document.getElementById("helloBtn");
+
+    helloBtn.addEventListener("click", function(event){
+        alert("Hello.");
+    }, false);
+</script>
+
+
+</body>
+</html>

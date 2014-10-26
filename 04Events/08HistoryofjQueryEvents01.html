@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>History of jQuery Events</title>
+</head>
+<body>
+
+<h4>History of jQuery Events</h4>
+<p>
+Throughout the evolution of jQuery the means of event binding has
+    changed for various reasons ranging from performance to semantics.
+    As of jQuery v1.7 the .on() method is the accepted means of both
+    directly binding events and creating delegated events. This article
+    aims to explore the history of event delegation from jQuery v1.0
+    to the present and how each version leverages it.
+</p>
+
+<p>
+Given the following HTML, for our example we want to log the text of
+    the each < li> to console whenever it is clicked.
+</p>
+
+<div id="container">
+    <ul id="list">
+        <li>Item #1</li>
+        <li>Item #2</li>
+        <li>Item #3</li>
+        <li>...</li>
+        <li>Item #100</li>
+    </ul>
+</div>
+
+
+<h3>.bind() (Deprecated)</h3>
+
+It is possible to use .bind() and attach a handler to every element.
+
+Example:<br><br>
+
+$("#list li").bind("click" , function(event){<br>
+var elem = $(event.target);<br>
+console.log(elem.text());<br>
+});<br>
+
+<script>
+    $("#list li").bind("click", function(event){
+        var elem = $(event.target);
+        console.log(elem.text());
+    });
+</script>
+
+even though deprecated this example still works.
+
+</body>
+</html>

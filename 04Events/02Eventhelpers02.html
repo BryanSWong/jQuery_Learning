@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Event Helpers</title>
+    <style>
+        .expander{
+            display: block;
+            color:red;
+        }
+
+        .open{
+            display: inline-block;
+        }
+
+    </style>
+
+</head>
+<body>
+
+.toggle()<br>
+
+<p class="expander">test p</p>
+
+<p class="expander">The .toggle() method is triggered by the "click" event and
+accepts two or more functions. Each time the click event
+occurs, the next function in the list is called. Generally,
+.toggle() is used with just two functions; however, it will
+accept an unlimited number of functions. Be careful, though:
+providing a long list of functions can be difficult to debug.
+</p>
+
+The toggle helper function<br><br>
+
+$("p.expander").toggle(function(){<br>
+$(this).prev().addClass("open");},<br>
+function(){<br>
+$(this).prev().removeClass("open");<br>
+});<br><br>
+
+<script>
+    $("p.expander").toggle(function(){
+        $(this).prev().addClass("open");},
+            function(){
+                $(this).prev().removeClass("open");
+    });
+
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>jQuery Event Basics</title>
+</head>
+<body>
+
+<h4>Namespacing Events</h4>
+
+<p class="myNamespace">
+For complex applications and for plugins you share with others,
+it can be useful to namespace your events so you don't
+unintentionally disconnect events that you didn't or
+couldn't know about.
+</p>
+
+Namespacing events<br><br>
+
+$("p").on("click.myNamespace", function(){});<br>
+$("p").off("click.myNamespace");<br>
+$("p").off(".myNamespace); // unbind all events in the namespace<br><br>
+
+<script>
+    $("p").on("click.myNamespace", function(){console.log("done")});
+    $("p").off("click.myNamespace");
+    $("p").off(".myNamespace");
+</script>
+
+</body>
+</html>

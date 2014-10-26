@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Introducing Events</title>
+</head>
+<body>
+
+The event object<br><br>
+
+
+<p>
+In all of the previous examples, we've been using anonymous
+functions and specifying an event argument within that function.
+Let's change it up a little bit.
+</p>
+
+Binding a named function<br><br>
+
+function sayHello(event){<br>
+alert("Hello")<br>
+}<br><br>
+
+$("#helloBtn").on("click", sayHello);<br><br>
+
+<button id="helloBtn">Say Hello</button>
+
+<script>
+
+    function sayHello(event){
+        alert("Hello");
+    }
+
+    $("#helloBtn").on("click", sayHello);
+
+</script>
+
+
+</body>
+</html>

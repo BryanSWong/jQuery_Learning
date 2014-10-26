@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Manipulating Elements part 1</title>
+    <script>
+        // Changing the HTML of an element.
+        $(document).ready(function(){
+
+            $("#myDiv p:first").html("New <strong>first</strong> paragraph");
+
+            var li = $("#myList li:first").appendTo("#myList");
+
+            $("#myList2").append($("#myList2 li:first"));
+
+            $("#myList3 li:first").clone().appendTo("#myList3");
+
+            var newElem = $("<p>This is a new paragraph</p>");
+
+            newElem.appendTo("#newStuff");
+
+            var newElem2 = $("<li class=\new\">new list item</li>");
+
+            newElem2.insertAfter("#newStuff");
+
+            var newElem3 = $("<a/>",{
+                html: "this is a <strong>new</strong> link",
+                "class": "new",
+                href: "foo.html"
+            });
+
+            newElem3.appendTo("#newStuff");
+
+            $("ul").last().after(newElem.clone());
+
+        });
+    </script>
+</head>
+<body>
+
+Changing the HTML of an element.<br><br>
+
+example:<br><br>
+$("#myDiv p:first").html("New <strong>first</strong> paragraph");
+
+<br><br>
+a div with the id = myDiv and two paragraphs in it.
+<br><br>
+
+<div id="myDiv">
+    <p>This is the first paragraph</p>
+    <p>another paragraph</p>
+
+</div>
+
+As you cans see the first paragraph was changed.
+
+<br><br>
+
+<h3>Moving, Copying, and Removing Elements</h3>
+
+
+Moving elements using different approaches.<br>
+
+Make the first list item the last list item:<br><br>
+
+
+example:<br><br>
+
+var li = $( "#myList li:first" ).appendTo( "#myList" );<br><br>
+
+a un-order list with id = myList and three li elements:<br><br>
+
+<ul id="myList">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+
+</ul>
+<br><br>
+
+Another approach to the same problem:<br><br>
+
+$("#myList2").append($("#myList2 li:first"));<br><br>
+a un-order list with id = myList2 and three li elements:<br><br>
+
+<ul id="myList2">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+
+</ul>
+
+
+<h3>Cloning Elements</h3>
+Methods such as .appendTo() move the element, but sometimes a copy <br>
+of the element is needed instead. In this case, use .clone() first:<br><br>
+
+$("#myList3 li:first").clone().appendTo("#myList3");<br><br>
+
+a un-order list with id = myList3 and three li elements:<br><br>
+
+<ul id="myList3">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+
+</ul>
+
+
+<h3>Creating New Elements</h3>
+jQuery offers a trivial and elegant way to create new elements using <br>
+the same $() method used to make selections:<br><br>
+
+$( "< p>This is a new paragraph< /p>" );<br>
+$( "< li class=\"new\">new list item< /li>" );<br><br>
+
+// Creating a new element with an attribute object.<br>
+$( "< a/>", {<br>
+html: "This is a < strong>new< /strong> link",<br>
+"class": "new",<br>
+href: "foo.html"<br>
+});<br><br><br>
+
+newly created html elements:<br>
+
+<div id="newStuff">
+
+</div>
+
+<br><br>
+
+To add the new elements we need to code some more like:<br><br>
+
+var newElem = $("< p>This is a new paragraph< /p>");<br><br>
+
+newElem.appendTo("#newStuff");<br><br>
+
+var newElem2 = $("< li class=\new\">new list item< /li>");<br><br>
+
+newElem2.insertAfter("#newStuff");<br><br>
+
+var newElem3 = $("< a/>",{<br>
+html: "this is a < strong>new< /strong> link",<br>
+"class": "new",<br>
+href: "foo.html"<br>
+});<br><br>
+
+newElem3.appendTo("#newStuff");<br><br>
+
+$("ul").last().after(newElem.clone());<br><br>
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+
+</body>
+</html>

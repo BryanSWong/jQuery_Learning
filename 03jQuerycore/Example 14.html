@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title> Attributes part 2</title>
+    <script>
+        var ref;
+        $(document).ready(function(){
+            ref = $("a").attr("href");
+            // Returns the href for the first a element in the document
+            ref =
+            console.log(ref);
+        });
+
+    </script>
+</head>
+<body>
+
+.attr() as a getter:<br>
+
+the code looks like:<br><br>
+
+$(document).ready(function(){<br>
+$("a").attr("href");<br>
+// Returns the href for the first a element in the document<br>
+});<br><br>
+
+<a href="Example 01">This is a link element</a><br><br>
+
+you can inspect the webpage and see in the console what the first "a"<br>
+element returns.
+
+
+
+</body>
+</html>

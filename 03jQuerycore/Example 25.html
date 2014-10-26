@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Utility Methods</title>
+    <script>
+
+        $(document).ready(function(){
+
+            console.log($.trim("    lots of extra whitespace    "));
+
+            $.each(["foo","bar","baz"], function(idx,val){
+                console.log("element "+ idx + " is "+ val);
+
+            });
+
+
+            $.each({foo:"bar", baz:"bim"}, function(k,v){
+                console.log(k + " : "+ v);
+            });
+
+
+            var myArray = [1,2,3,4,5];
+
+            if($.inArray(4,myArray) !== -1){
+                console.log("found it!");
+            }
+
+
+            var firstObject = {foo:"bar", a:"b"};
+            var secondObject = {foo:"baz"};
+
+            var newObject = $.extend({}, firstObject, secondObject);
+
+            console.log(firstObject.foo); // "bar"
+            console.log(newObject.foo); // "baz"
+
+
+            var myFunction = function(){
+                console.log(this);
+            };
+
+            var myObject ={ foo:"bar"};
+
+            myFunction();
+
+            var myProxyFunction = $.proxy(myFunction, myObject);
+
+            myProxyFunction();  // myObject
+
+
+            var myObject2 = {
+                myFn: function(){
+                    console.log(this);
+                }
+            };
+
+            $("#foo").click(myObject2.myFn);  // HTMLElement #foo
+            $("#foo").click($.proxy(myObject, "myFn")); // myObject
+
+        });
+
+
+
+    </script>
+</head>
+<body>
+
+<h3>Utility Methods</h3>
+jQuery offers several utility methods in the $ namespace. <br>
+These methods are helpful for accomplishing routine programming tasks.<br><br>
+
+$.trim()<br>
+
+Removes leading and trailing whitespace:<br>
+$.trim("    lots of extra whitespace    ");<br><br>
+
+$.each()<br>
+
+Iterates over arrays and objects:<br><br>
+
+$.each(["foo","bar","baz"], function(idx,val){<br>
+console.log("element "+ idx + " is "+ val);<br>
+
+});<br><br>
+
+
+$.each({foo:"bar", baz:"bim"}, function(k,v){<br>
+console.log(k + " : "+ v);<br>
+});<br><br>
+
+$.inArray()<br>
+
+Returns a value's index in an array, or -1 if the value is not in the array:<br><br>
+
+var myArray = [1,2,3,4,5];<br><br>
+
+if($.inArray(4,myArray) !== -1){<br>
+console.log("found it!");<br>
+}<br><br>
+
+$.extend()<br>
+
+Changes the properties of the first object using <br>
+the properties of subsequent objects:<br><br>
+
+var firstObject = {foo:"bar", a:"b"};<br>
+var secondObject = {foo:"baz"};<br><br>
+
+var newObject = $.extend({}, firstObject, secondObject);<br><br>
+
+console.log(firstObject.foo); // "bar"<br>
+console.log(newObject.foo); // "baz"<br><br>
+
+
+$.proxy()<br>
+
+Returns a function that will always run in the provided scope<br>
+— that is, sets the meaning of this inside the passed function <br>
+to the second argument.<br><br>
+
+
+var myFunction = function(){<br>
+console.log(this);<br>
+};<br><br>
+
+var myObject ={ foo:"bar"};<br><br>
+
+myFunction();<br><br>
+
+var myProxyFunction = $.proxy(myFunction, myObject);<br><br>
+
+myProxyFunction();  // myObject<br><br>
+
+
+
+If you have an object with methods, you can pass the object<br>
+and the name of a method to return a function that will always<br>
+run in the scope of the object.<br><br>
+
+
+var myObject2 = {<br>
+myFn: function(){<br>
+console.log(this);<br>
+}<br>
+};<br><br>
+
+$("#foo").click(myObject2.myFn);  // HTMLElement #foo<br>
+$("#foo").click($.proxy(myObject, "myFn")); // myObject<br><br>
+
+<div id="foo">this is a div</div>
+
+You have to inspect the web page to see the code work<br>
+clickiing on the div will show up on the console.
+
+
+
+
+
+</body>
+</html>

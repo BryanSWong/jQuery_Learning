@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Using jQuery’s .index() Function part 3</title>
+    <script>
+
+        $(document).ready(function(){
+
+            var foo =$("li");
+            var baz =$("#baz1");
+
+            console.log("Index "+ foo.index(baz)); //2
+
+            var tests = $(".test");
+            var bar = $("#bar1");
+
+            // Implicitly calls .first() on the argument.
+            console.log("Index " + tests.index(bar)); //1
+
+            console.log("Index " +tests.index(bar.first())); //1
+
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+<h2>.index() with a jQuery Object Argument</h2>
+
+The jQuery code:<br><br>
+
+var foo =$("li");<br>
+var baz =$("#baz1");<br><br>
+
+console.log("Index "+ foo.index(baz)); //2<br><br>
+
+var tests = $(".test");<br>
+var bar = $("#bar1");<br><br>
+
+Implicitly calls .first() on the argument.<br>
+console.log("Index " + tests.index(bar)); //1<br><br>
+
+console.log("Index " +tests.index(bar.first())); //1<br><br>
+
+
+
+
+<ul>
+    <div class="test"></div>
+    <li id="foo1">foo</li>
+    <li id="bar1" class="test">bar</li>
+    <li id="baz1">baz</li>
+    <div class="test"></div>
+</ul>
+<div id="last"></div><br><br>
+
+
+In this case, the first element of the jQuery object that is passed<br>
+into .index() is being checked against all of the elements in the <br>
+original jQuery object. The original jQuery object, on the left side <br>
+of .index(), is array-like and is searched from index 0 through <br>
+length - 1 for the first element of the argument jQuery object.<br><br>
+
+
+
+</body>
+</html>

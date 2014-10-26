@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Data Methods</title>
+    <script>
+
+        $(document).ready(function(){
+
+            // Storing and retrieving data related to an element.
+          $("#myDiv").data("keyName", {foo: "bar"});
+
+          console.log($("#myDiv").data("keyName")); // Returns { foo: "bar" }
+
+
+            // Storing a relationship between elements using .data()
+
+            $("#myList li").each(function(){
+
+               var li = $(this);
+                var div = li.find("div.content");
+
+                li.data("contentDiv", div);
+
+            });
+
+            // Later, we don't have to find the div again;
+            // we can just read it from the list item's data
+            var firstLi = $("#myList li:first");
+
+            console.log(firstLi.data("contentDiv").html("new content"));
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+<h3>Data Methods</h3>
+There's often data about an element you want to store with<br>
+the element. In plain JavaScript, you might do this by adding<br>
+a property to the DOM element, but you'd have to deal with <br>
+memory leaks in some browsers. jQuery offers a straightforward<br>
+way to store data related to an element, and it manages the <br>
+memory issues for you.<br><br>
+
+
+Storing and retrieving data related to an element.<br>
+$("#myDiv").data("keyName", {foo: "bar"});<br><br>
+
+$("#myDiv").data("keyName"); // Returns {foo: "bar"}<br>
+you can see the result in console when you inspect the page<br><br>
+
+
+<div id="myDiv">myDiv</div><br><br>
+
+Any kind of data can be stored on an element. <br>
+For the purposes of this article, .data() will be used to store<br>
+references to other elements.<br><br>
+
+$("#myList li").each(function(){<br><br>
+
+var li = $(this);<br>
+var div = li.find("div.content");<br><br>
+
+li.data("contentDiv", div);<br>
+
+});<br><br>
+
+Later, we don't have to find the div again;<br>
+we can just read it from the list item's data<br>
+var firstLi = $("#myList li:first");<br><br>
+
+firstLi.data("contentDiv").html("new content");<br>
+
+});<br><br>
+
+
+<ul id="myList">
+    <li><div class="content">item 1</div></li>
+    <li>item 2</li>
+    <li>item 3</li>
+    <li>item 4</li>
+
+
+</ul><br><br>
+
+original ul list:<br><br>
+
+< ul id="myList"><br>
+    < li>< div class="content">item 1< /div>< /li><br>
+    < li>item 2< /li><br>
+    < li>item 3< /li><br>
+    < li>item 4< /li><br>
+
+
+< /ul><br><br>
+
+
+</body>
+</html>

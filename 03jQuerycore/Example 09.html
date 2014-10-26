@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="prototype.js"></script>
+    <script src="jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Avoiding Conflicts with Other Libraries part 4</title>
+    <script>
+        // Give $ back to prototype.js; create new alias to jQuery.
+        var $jq = jQuery.noConflict();
+
+        $jq(document).ready(function(){
+            $jq("div").hide();
+        });
+
+    </script>
+
+</head>
+<body>
+
+<h4>Create a New Alias</h4>
+
+<p>The jQuery.noConflict() method returns a reference to the
+    jQuery function, so you can capture it in whatever variable you'd like:
+</p>
+
+code looks like:<br><br>
+
+< script src="prototype.js">< /script><br>
+< script src="jquery.js">< /script><br><br>
+
+< script><br><br>
+// Give $ back to prototype.js; create new alias to jQuery.<br>
+var $jq = jQuery.noConflict();<br><br>
+
+
+// added code to show that it works:<br><br>
+
+$jq(document).ready(function(){<br>
+$jq("div").hide();<br>
+});<br><br>
+
+< /script><br>
+
+
+<h5>there is a div below this h5 header. you can inspect the webpage to see it.</h5>
+
+<div>This is a div element.</div>
+
+</body>
+</html>

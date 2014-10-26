@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>jQuery Event Extensions</title>
+</head>
+<body>
+
+<h4>The handleObj object</h4>
+<p>
+Many of the special event hook functions below are passed a handleObj
+    object that provides more information about the event, how it was
+    attached, and its current state. This object and its contents should
+    be treated as read-only data, and only the properties below are documented
+    for use by special event handlers. For the discussion below, assume an
+    event is attached with this code:
+</p>
+
+$( ".dialog" ).on( "click.myPlugin", "button", {<br>
+mydata: 42<br>
+}, myHandler );<br>
+<br>
+<script>
+    $( ".dialog" ).on( "click.myPlugin", "button", {
+        mydata: 42
+    }, myHandler );
+</script>
+
+</body>
+</html>

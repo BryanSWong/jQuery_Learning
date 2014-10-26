@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Inside the Event Handling Function</title>
+</head>
+<body>
+
+<p>
+    Every event handling function receives an event object,
+which contains many properties and methods. The event object
+is most commonly used to prevent the default action of the
+event via the .preventDefault() method. However, the event
+object contains a number of other useful properties and methods,
+including:
+</p>
+
+<strong>link pageX, pageY</strong><br><br>
+
+The mouse position at the time the event occurred, relative to the top left of the page.<br><br>
+
+<strong>type</strong><br><br>
+
+The type of the event (e.g. "click").<br><br>
+
+<strong>which</strong><br><br>
+
+The button or key that was pressed.<br><br>
+
+<strong>data</strong><br><br>
+
+Any data that was passed in when the event was bound.<br><br>
+
+<strong>target</strong><br><br>
+
+The DOM element that initiated the event.<br><br>
+
+<strong>preventDefault()</strong><br><br>
+
+Prevent the default action of the event (e.g. following a link).<br><br>
+
+<strong>stopPropagation()</strong><br><br>
+
+Stop the event from bubbling up to other elements.<br><br>
+
+<p>
+
+    In addition to the event object, the event handling function
+also has access to the DOM element that the handler was bound
+to via the keyword this. To turn the DOM element into a jQuery
+object that we can use jQuery methods on, we simply do $( this ),
+often following this idiom:
+</p>
+
+var elem = $(this);<br><br>
+
+Preventing a link from being followed<br><br>
+
+$("a").click(function(event){<br>
+var elem = $(this);<br>
+if(elem.attr("href").match("evil")){<br>
+event.preventDefault();<br>
+elem.addClass("evil");<br>
+}<br>
+});<br><br>
+
+<a href="www.evil.com">Example evil link</a>
+
+<script>
+    $("a").click(function(event){
+       var elem = $(this);
+        if(elem.attr("href").match("evil")){
+            event.preventDefault();
+            elem.addClass("evil");
+        }
+    });
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

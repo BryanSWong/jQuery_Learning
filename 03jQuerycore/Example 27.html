@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Iterating over jQuery and non-jQuery Objects part 2</title>
+    <script>
+
+
+        $(document).ready(function(){
+
+            var arr =[{
+                id: "a",
+                tagName:"li"
+
+            }, {
+                id: "b",
+                tagName: "li"
+            }, {
+                id: "c",
+                tagName: "li"
+            }];
+
+            // Returns [ "a", "b", "c" ]
+            console.log($("li").map(function(index, element){
+                return element.id;
+            }).get());
+
+
+            // Also returns ["a", "b", "c"]
+            // Note that the value comes first with $.map
+            console.log($.map(arr, function(value,index){
+                return value.id;
+            }));
+
+
+
+        });
+
+
+
+    </script>
+</head>
+<body>
+
+Iterating over jQuery and non-jQuery Objects part 2:<br><br>
+
+
+A word of warning: $.map() switches the order of callback arguments. <br>
+This was done in order to match the native JavaScript .map() method <br>
+made available in ECMAScript 5.<br><br>
+
+
+<ul>
+    <li id="a">item 1</li>
+    <li id="b">item 2</li>
+    <li id="c">item 3</li>
+</ul>
+
+
+the code:<br><br>
+
+var arr =[{<br>
+id: "a",<br>
+tagName:"li"<br>
+
+}, {<br>
+id: "b",<br>
+tagName: "li"<br>
+}, {<br>
+id: "c",<br>
+tagName: "li"<br>
+}];<br><br>
+
+// Returns [ "a", "b", "c" ]<br>
+$("li").map(function(index, element){<br>
+return element.id;<br>
+}).get();<br><br>
+
+// Also returns ["a", "b", "c"]<br>
+// Note that the value comes first with $.map<br>
+$.map(arr, function(value,index){<br>
+return value.id;<br>
+});<br><br>
+
+You have to inspect the web page and view console to see results.
+
+
+
+</body>
+</html>

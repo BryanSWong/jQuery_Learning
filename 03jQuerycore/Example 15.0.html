@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Selecting Elements</title>
+    <script>
+
+        $(document).ready(function(){
+            $("#myId").hide(); //Selecting Elements by ID
+
+            $(".myClass").hide(); //Selecting Elements by Class Name
+
+            $("input[name='first_name']").hide(); //Selecting Elements by Attribute
+
+            $("#contents, ul.people li").hide();
+            //Selecting Elements by Compound CSS Selector
+
+            $("a.external:first").hide();
+
+            $("tr:odd").hide();
+
+            $("#myForm:input").hide();
+
+            $("div:visible");
+
+            $("#div3").animate({right:'300px'},"slow");
+
+            $("div:gt(2)").hide();
+
+            $("div:animated").hide();
+
+
+
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+The most basic concept of jQuery is to "select some elements and do <br>
+something with them." jQuery supports most CSS3 selectors, as well <br>
+as some non-standard selectors.<br><br>
+
+Examples:<br><br>
+
+<p>This is a paragraph with out the id property but the paragraph with<br>
+the id property is hidden below because it was selected and set to hide <br>
+with jquery. you can inspect the webpage and see the paragraph.
+</p>
+
+Here is is the code:<br>
+$("#myId).hide();<br>
+<p id="myId"> This is a paragraph with the id property = myId.</p>
+<br>
+
+<p>This is a paragraph with out a class id. The other paragraph has the class<br>
+id and is hidden due to jquery .hide() called on the selector of the class.<br>
+you can inspect the webpage and see paragraph.
+</p>
+Here is is the code:<br>
+$(".myClass").hide();
+<p class="myClass">This paragraph has the class id = myClass.</p>
+
+This form does not have the name attribute:<br>
+<form><input value="This is a form input"></form>
+
+The form below has the name attribute:<br>
+<form><input name="first_name"></form><br>
+it was hidden with the jquery .hide() you can inspect the webpage to see it.<br>
+<br>
+
+Here is is the code:<br>
+$("input[name='first_name']").hide();<br><br>
+
+Here is a un-ordered list with out the id = contents and  list item class = people.
+<br>
+There is also a paragraph in the ul tag<br>
+<ul>
+    <p>List 1:</p>
+    <li>first item</li>
+    <li>second item</li>
+    <li>third item</li>
+
+</ul>
+
+with the compound selector option in jQuery you can select multiple elements<br>
+in this case the ul tag had the class people and paragraph has the id contents<br>
+and they are hidden with the .hide()<br><br>
+Here is is the code:<br>
+$("#contents, ul.people li").hide();
+
+<ul class="people">
+    <p id="contents">List 2:</p>
+    <li >first item</li>
+    <li>second item</li>
+    <li>third item</li>
+</ul>
+<br><br><br>
+
+Pseudo-Selectors<br><br>
+
+$("a.external:first").hide();<br><br>
+this selets the first link with the class external and does the jquery assigned,
+<br>
+in this case hide();<br>
+
+<a class="external" href="Example 01">This is one link</a><br>
+<a class="external" href="Example 02">This is another link</a><br><br>
+
+
+$("tr:odd").hide();<br><br>
+This selects all the odd elements of tr that have td data in a table<br>
+and in this case applies the hide(); case remember that everything starts at "0"
+<br>
+0,1,2,3 [1,2,3,4] and the odds are hidden leaving 1 and 3<br>
+
+<table border="solid">
+    <tr>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>4</td>
+    </tr>
+</table><br><br>
+
+$("#myForm:input).hide(); <br>
+selects a input with id = myForm and hides it.<br><br>
+
+<form>
+    <input id="myForm">
+</form><br><br>
+
+$("div:visible).hide();<br><br>
+all visible divs will be hidden with this code so I'm going to disable it
+<br>
+for the next few examples that will need divs visible to see what happens to them.
+<br>
+<br>
+<div>This is a div</div>
+<br><br>
+$("div:gt(2)").hide(); // All except the first three divs.<br><br>
+<div>This is a div 2</div><br>
+<div id="div3">This is a div 3</div><br>
+<div>This is a div 4</div><br>
+<div>This is a div 5</div><br>
+divs beyond the first three are hidden
+<br><br>
+
+$("div:animated").hide(): // All currently animated divs.<br><br>
+Sadly you can see div 3 in animate action becuse its hidden already by above code.
+<br>
+
+
+
+
+
+
+
+
+</body>
+</html>

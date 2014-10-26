@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Handling Events</title>
+</head>
+<body>
+
+Connecting Events to Run Only Once<br><br>
+
+<p>
+    Sometimes you need a particular handler to run only
+    once — after that, you may want no handler to run,
+    or you may want a different handler to run. jQuery
+    provides the .one() method for this purpose.
+</p>
+
+Switching handlers using the '.one()' method<br><br>
+
+$("p").one("click", function(){<br>
+console.log("You just clicked this for the first time!");<br>
+$(this).click(function(){<br>
+console.log("You have clicked this before!");<br>
+});<br>
+});<br><br>
+
+<p>Test paragraph</p>
+
+<script>
+    $("p").one("click", function(){
+        console.log("You just clicked this for the first time!");
+
+        $(this).click(function(){
+            console.log("You have clicked this before!");
+        });
+    });
+</script>
+
+
+</body>
+</html>

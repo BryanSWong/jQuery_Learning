@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Using jQuery’s .index() Function part 2</title>
+    <script>
+
+        $(document).ready(function(){
+
+            var foo = $("li");
+
+            // This implicitly calls .first()
+            console.log("Index " + foo.index("li")); //0
+            console.log("Index " + foo.first().index("li")); //0
+
+            var baz = $("#baz1");
+
+            console.log("Index "+ baz.index("li")); //2
+
+            var listItem = $("#bar1");
+            console.log("Index "+ listItem.index(".test")); //1
+
+            var div = $("#last");
+            console.log("Index "+ div.index("div")); //2
+
+
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+<h2>.index() with a String Argument</h2>
+
+The jQuery code:<br><br>
+
+var foo = $("li");<br><br>
+
+ This implicitly calls .first()<br>
+console.log("Index " + foo.index("li")); //0<br>
+console.log("Index " + foo.first().index("li")); //0<br><br>
+
+var baz = $("#baz1");<br>
+
+console.log("Index "+ baz.index("li")); //2<br><br>
+
+var listItem = $("#bar1");<br>
+console.log("Index "+ listItem.index(".test")); //1<br><br>
+
+var div = $("#last");<br>
+console.log("Index "+ div.index("div")); //2<br><br>
+
+
+<ul>
+    <div class="test"></div>
+    <li id="foo1">foo</li>
+    <li id="bar1" class="test">bar</li>
+    <li id="baz1">baz</li>
+    <div class="test"></div>
+</ul>
+<div id="last"></div><br><br>
+
+
+When .index() is called with a string argument, there are two things to <br>
+consider. First, jQuery will implicitly call .first() on the original<br>
+jQuery object. It will find the index of the first element, not the last <br>
+element in this case. This is inconsistent, so be careful here.<br><br>
+
+The second point to consider is that jQuery is querying the entire DOM<br>
+using the passed in string selector and checking the index within that<br>
+newly queried jQuery object. For example, when using .index( "div" )<br>
+in the last example above, jQuery is selecting all of the < div> <br>
+    elements in the document, then searching for the index that<br>
+contains the first element in the jQuery object .index() is called on.<br><br>
+
+
+
+
+
+
+</body>
+</html>

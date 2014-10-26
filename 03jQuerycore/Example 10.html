@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="prototype.js"></script>
+    <script src="jQuery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Avoiding Conflicts with Other Libraries part 5</title>
+    <script>
+        jQuery.noConflict();
+
+        (function($){
+            //Your jQuery code here, using the $
+            $(document).ready(function(){$("div").hide();});
+        })(jQuery);
+    </script>
+</head>
+<body>
+
+<h4>Use an Immediately Invoked Function Expression</h4>
+
+<p>You can continue to use the standard $ by wrapping your
+    code in an immediately invoked function expression; this
+    is also a standard pattern for jQuery plugin authoring,
+    where the author cannot know whether another library will
+    have taken over the $.
+</p>
+
+The code looks like:<br><br>
+
+< script src="prototype.js">< /script><br>
+< script src="jquery.js">< /script><br><br>
+
+< script><br><br>
+
+jQuery.noConflict();<br><br>
+
+(function($){<br>
+// Your jQuery code here, using the $<br><br>
+$(document).ready(function(){$("div").hide();});<br><br>
+})(jQuery);<br><br>
+
+< /script><br><br>
+
+<h5>There is a div below this h5 header. the code hides it.</h5>
+
+<div>This is a div element.</div>
+You can inspect the web page to see it.
+
+
+
+</body>
+</html>

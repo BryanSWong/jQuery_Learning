@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title> $( document ).ready() part 3</title>
+    <script>
+        function readyFn(jQuery){
+            console.log("tested and approved");
+        }
+
+        $(document).ready(readyFn);
+        //or
+        $(window).load(readyFn);
+
+    </script>
+</head>
+<body>
+
+You can also pass a named function to $( document ).ready() instead <br>
+of passing an anonymous function.<br><br>
+
+the code looks like:<br><br>
+
+function readyFn(jQuery){<br>
+//code to run when the document is ready.<br>
+console.log("tested and approved");<br>
+
+}<br>
+
+$(document).ready(readFn);<br>
+//or<br>
+$(window).load(readyFn);<br>
+
+
+
+</body>
+</html>

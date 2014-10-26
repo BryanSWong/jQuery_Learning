@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>History of jQuery Events</title>
+</head>
+<body>
+
+
+<div id="container">
+    <ul id="list">
+        <li>Item #1</li>
+        <li>Item #2</li>
+        <li>Item #3</li>
+        <li>...</li>
+        <li>Item #100</li>
+    </ul>
+</div>
+
+
+<h3>.bind() delegation (Deprecated)</h3>
+<p>
+Generally we don't associate .bind() with event delegation,
+    however prior to jQuery v1.3 it was the only means of
+    delegation available to us.
+</p>
+
+Example:<br><br>
+
+$("#list").bind("click", function(event){<br>
+var elem = $(event.target");<br>
+if(elem.is("li")){<br>
+console.log(elem.text());<br>
+}<br>
+});<br>
+
+<script>
+    $("#list").bind("click", function(event){
+        var elem = $(event.target);
+                if(elem.is("li")){
+                    console.log(elem.text());
+                }
+    });
+</script>
+
+even though deprecated this example still works.
+
+</body>
+</html>

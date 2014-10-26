@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Manipulating Elements part 2</title>
+    <script>
+
+        $(document).ready(function(){
+
+            $("ul").append("<li>list item</li>");
+
+            var myItems =[];
+            var myList = $("#myList");
+
+            for(var i =0; i <10; i++){
+                myItems.push("<li>item "+ i + "</li>");
+            }
+
+            myList.append(myItems.join(""));
+
+            $("#myDiv a:first").attr("href", "newDestination.html");
+
+            $("#myDiv2 a:first").attr({
+                href: "newDestination.html",
+                rel: "nofollow"
+            });
+            // Using a function to determine an attribute's new value.
+            $("#myDiv3 a:first").attr({
+                rel: "nofollow",
+                href: function(idx,href){
+                    return "/new/" + href;
+                }
+
+            });
+
+
+
+        });
+
+
+    </script>
+
+</head>
+<body>
+
+
+Creating and adding an element to the page at the same time.<br><br>
+$( "ul" ).append( "< li>list item< /li>" );<br><br>
+
+An un-order list with a few li already plus the adds:
+
+<ul>
+    <li>was here already</li>
+    <li>was here already</li>
+    <li>was here already</li>
+</ul>
+
+The syntax for adding new elements to the page is easy, so it's <br>
+tempting to forget that there's a huge performance cost for adding <br>
+to the DOM repeatedly. If you're adding many elements to the same <br>
+container, you'll want to concatenate all the HTML into a single <br>
+string, and then append that string to the container instead of <br>
+appending the elements one at a time. Use an array to gather all <br>
+the pieces together, then join them into a single string for appending:<br><br>
+
+example:<br><br>
+
+var myItems = [];<br>
+var myList = $( "#myList" );<br><br>
+
+for ( var i = 0; i < 10; i++ ) {<br>
+myItems.push( "< li>item " + i + "< /li>" );<br>
+}<br><br>
+
+myList.append( myItems.join( "" ) );<br><br>
+
+
+<ul id="myList">
+
+</ul>
+
+
+<h3>Manipulating Attributes</h3>
+jQuery's attribute manipulation capabilities are extensive. <br>
+Basic changes are simple, but the .attr() method also allows <br>
+for more complex manipulations. It can either set an explicit <br>
+value, or set a value using the return value of a function. <br>
+When the function syntax is used, the function receives two <br>
+arguments: the zero-based index of the element whose attribute <br>
+is being changed, and the current value of the attribute being changed.<br><br><br>
+
+examples:<br><br>
+Manipulating a single attribute.<br>
+$( "#myDiv a:first" ).attr( "href", "newDestination.html" );<br><br>
+<div id="myDiv">
+    <a href="Example 01.html">This is a link</a><br>
+    if you inspect the link you can see the link has been changed<br>
+    from href = Example 01.html to the defined link in code.<br><br>
+    <a href="Example 02.html">this link was not affected</a>
+
+</div><br><br>
+
+
+
+
+Manipulating multiple attributes.<br>
+$( "#myDiv2 a:first" ).attr({<br>
+href: "newDestination.html",<br>
+rel: "nofollow"<br>
+});<br><br>
+
+<div id="myDiv2">
+    <a href="Example 01.html">This is a link</a><br>
+    if you inspect the link you can see the link has been changed<br>
+    from href = Example 01.html to the defined link in code.<br>
+    also the rel attribute was added<br><br>
+    <a href="Example 02.html">this link was not affected</a>
+
+</div><br><br>
+
+
+
+
+Using a function to determine an attribute's new value<br>.
+$( "#myDiv3 a:first" ).attr({<br>
+rel: "nofollow",<br>
+href: function( idx, href ) {<br>
+return "/new/" + href;<br>
+}<br>
+});<br><br>
+
+
+
+$("#myDiv3 a:first").attr("href",function(idx, href){<br>
+return "/new/" + href;<br>
+});
+
+<div id="myDiv3">
+    <a href="Example 01.html">This is a link</a><br>
+    if you inspect the link you can see<br>
+    href = Example 01.html is the same but /new/ was added in front<br>
+    changeing the path, also the rel attribute was added<br><br>
+    <a href="Example 02.html">this link was not affected</a>
+
+</div><br><br>
+
+
+
+<br><br><br><br>
+</body>
+</html>

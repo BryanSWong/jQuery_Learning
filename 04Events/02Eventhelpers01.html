@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Event Helpers</title>
+
+    <style>
+        .hover{
+            color:blue;
+            font-family: sans-serif;
+        }
+    </style>
+
+</head>
+<body>
+
+jQuery offers two event-related helper functions that save you a few keystrokes.<br><br>
+
+.hover()<br><br>
+
+<p>
+    The .hover() method lets you pass one or two functions to be run when the
+mouseenter and mouseleave events occur on an element. If you pass one
+function, it will be run for both events; if you pass two functions,
+the first will run for mouseenter, and the second will run for mouseleave.
+</p>
+
+Note: Prior to jQuery 1.4, the .hover() method required two functions.<br><br>
+
+The hover helper function<br>
+$("#menu li").hover(function(){<br>
+$(this).toggleClass("hover");<br>
+});<br><br>
+
+<ul id="menu" >
+    <li>hp</li>
+    <li>dell</li>
+    <li>toshiba</li>
+</ul>
+
+<script>
+    $("#menu li").hover(function(){
+        $(this).toggleClass("hover");
+    });
+</script>
+
+
+
+
+
+</body>
+</html>

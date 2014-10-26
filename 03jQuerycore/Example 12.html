@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <script src="prototype.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Avoiding Conflicts with Other Libraries part 7</title>
+    <script>
+        jQuery(function($){
+            $(document).ready(function(){
+                $("div").hide();
+            });
+        });
+    </script>
+</head>
+<body>
+
+Using the more concise syntax for the DOM ready function:<br><br>
+
+the code looks like:<br><br>
+
+< script src="jquery.js">< /script><br>
+< script src="prototype.js">< /script><br><br>
+
+< script><br><br>
+
+jQuery(function($){<br>
+// Your jQuery code here, using the $<br>
+$(document).ready(function(){<br>
+$("div").hide();<br>
+
+});<br>
+
+});<br>
+
+<h5>There is a div element below this h5 header.</h5>
+
+<div>This is a div element.</div>
+
+You can inspect the webpage to see it.
+
+</body>
+</html>

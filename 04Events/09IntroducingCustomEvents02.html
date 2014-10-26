@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Introducing Custom Events</title>
+</head>
+<body>
+
+Example html:<br>
+< div> class="room" id="kitchen><br>
+< div class="lightbulb on">< /div><br>
+< div class="switch">< /div><br>
+< div class="switch">< /div><br>
+< div class="clapper"> < /div><br>
+< /div><br><br>
+
+Example html in action:
+<div class="room" id="kitchen">
+    <div class="lightbulb on">lightbulb</div>
+    <div class="switch">switch</div>
+    <div class="switch">switch</div>
+    <div class="clapper">clapper</div>
+</div>
+<br><br>
+
+
+With custom events, your code might look more like this:<br><br>
+
+$(".switch, .clapper").click(function(){<br>
+var light = $(this).parent().find(".lightbulb");<br>
+if(light.hasClass("on")){<br>
+light.removeClass("on").addClass("off");<br>
+} else{<br>
+light.removeClass("off").addClass("on");<br>
+}<br>
+});<br><br>
+
+$(".switch, .clapper").click(funciton(){<br>
+$(this).parent().find("lightbulb").trigger("changeState");<br>
+});<br>
+<br>
+
+<script>
+    $(".switch, .clapper").click(function(){
+        var light = $(this).parent().find(".lightbulb");
+        if(light.hasClass("on")){
+            light.removeClass("on").addClass("off");
+        } else {
+            light.removeClass("off").addClass("on");
+        }
+    });
+
+    $(".switch, .clapper").click(function(){
+        $(this).parent().find(".lightbulb").trigger("changeState");
+    });
+</script>
+
+This last bit of code is not that exciting, but something <br>
+important has happened: we've moved the behavior of the lightbulb <br>
+away from the switches and the clapper and to the lightbulb itself.<br><br>
+
+
+</body>
+</html>

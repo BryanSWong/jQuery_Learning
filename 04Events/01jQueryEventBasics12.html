@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>jQuery Event Basics</title>
+</head>
+<body>
+
+function firstClick(){<br>
+console.log("you just clicked this for the first time!");<br>
+// Now set up the new handler for subsequent clicks;<br>
+// omit this step if no further click responses are needed<br>
+$(this).click(function(){console.log("you have clicked this before!");} );<br>
+}<br><br>
+
+<p>Note that in the code snippet above, the firstClick function
+will be executed for the first click on each paragraph element
+rather than the function being removed from all paragraphs when
+any paragraph is clicked for the first time.
+</p>
+
+.one() can also be used to bind multiple events:<br><br>
+
+$("input[id]").one("focus mouseover keydown", firstEvent);<br>
+function firstEvent(eventObject){<br>
+console.log("A " + eventObject.type + " event occured for the first time!" + this.id);<br>
+}<br><br>
+
+input:<input id="ha" type="text" value="start">
+
+<script>
+
+    $("input[id]").one("focus mouseover keydown", firstEvent);
+
+    function firstEvent(eventObject){
+        console.log("A " + eventObject.type + " event occured for the first time!" + " " + this.id)
+    }
+
+
+</script>
+
+
+
+<p>In this case, the firstEvent function will be executed
+    once for each event. For the snippet above, this means
+    that once an input element gains focus, the handler
+    function will still execute for the first keydown
+    event on that element.</p>
+
+</body>
+</html>

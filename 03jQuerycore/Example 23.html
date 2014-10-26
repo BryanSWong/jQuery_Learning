@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>CSS, Styling, & Dimensions</title>
+    <script>
+
+        $(document).ready(function(){
+
+            console.log($("h1").css("fontSize"));
+
+            console.log($("h1").css("font-size"));
+
+            $("#example1").css("fontSize","100px"); // Setting an individual property.
+
+
+            // Setting multiple properties.
+            $("#example2").css({
+                fontSize: "100px",
+                color: "red"
+            });
+
+
+            $("#example3").width("50px");
+
+            console.log($("h1").width());
+
+            $("#example4").height("50px");
+
+            console.log($("h1").height());
+
+            console.log($("#example5").position());
+
+
+        });
+
+    </script>
+</head>
+<body>
+
+<h3>CSS, Styling, & Dimensions</h3>
+jQuery includes a handy way to get and set CSS properties of elements:<br><br>
+
+Getting CSS properties.<br><br>
+
+$("h1").css("fontSize"); Returns a string such as "32px".<br><br>
+
+$("h1").css("font-size"); Also works,Returns a string such as "32px".<br><br>
+
+<h1>This is a h1 header</h1>
+
+you can see it in action by inspecting the web page and looking in console.
+<br><br>
+
+
+Setting CSS properties.<br><br>
+
+$("h1").css("fontSize","100px");  Setting an individual property.
+
+<h1 id="example1">This is a h1 header</h1>
+
+Setting multiple properties.<br>
+$("h1").css({<br>
+fontSize: "100px",<br>
+color: "red"<br>
+});
+
+<h1 id="example2">This is a h1 header</h1>
+
+
+<h3>Using CSS Classes for Styling</h3>
+As a getter, the .css() method is valuable. However, it should<br>
+generally be avoided as a setter in production-ready code,<br>
+because it's generally best to keep presentational information<br>
+out of JavaScript code. Instead, write CSS rules for classes<br>
+that describe the various visual states, and then change the<br>
+class on the element.<br><br>
+
+
+$("h1").width("50px"); // Sets the width of all < h1> elements.<br><br>
+
+<h1 id="example3">This is a h1 header</h1>
+
+$("h1").width(); // Gets the width of the first < h1> element<br><br>
+
+You can see the result in console by inspection of web page<br><br>
+
+$("h1").height("50px"); // Sets the height of all < h1> elements.<br><br>
+
+<h1 id="example4">This is a h1 header</h1>
+
+$("h1").height(); // Gets the height of the first < h1> element.<br><br>
+
+You can see the result in console by inspection of web page<br><br>
+
+($("h1").position();<br><br>
+
+Returns an object containing position information for
+the first < h1> relative to its "offset (positioned) parent".
+
+<h1 id="example5">This is a h1 header</h1>
+
+You can see the result in console by inspection of web page<br><br>
+
+
+
+</body>
+</html>

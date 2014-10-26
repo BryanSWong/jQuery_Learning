@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="prototype.js"></script>
+    <script src="jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Avoiding Conflicts with Other Libraries part 2</title>
+
+    <script>
+        // Another way to put jQuery into no-conflict mode.
+    jQuery.noConflict();
+
+    jQuery(document).ready(function($){
+        // You can use the locally-scoped $ in here as an alias to jQuery.
+        $( "div" ).hide();
+        $("div").hide();
+        });
+
+    // The $ variable in the global scope has the prototype.js meaning.
+        window.onload = function() {
+            var maindiv = $("main");
+        }
+
+    </script>
+
+</head>
+<body>
+
+<h3>there is a div element below this h3 header but the code hides it.</h3>
+
+<div>This is a div element</div>
+
+<p>if you don't want to define another alternative to the full jQuery
+    function name (you really like to use $ and don't care about using
+    the other library's $ method), then there's still another approach
+    you might try: simply add the $ as an argument passed to your
+    jQuery( document ).ready() function.</p>
+
+Another way to put jQuery into no-conflict mode.<br><br>
+
+The code looks like:<br><br>
+
+< script src="prototype.js">< /script><br>
+< script src="jquery.js"> < /script><br><br>
+
+< script><br><br>
+
+jQuery.noConflict();<br><br>
+
+jQuery(document).ready(function($){<br><br>
+
+$("div").hide();<br><br>
+
+});<br><br>
+
+window.onload = function() {<br><br>
+
+var mainDiv = $("main");<br><br>
+
+}<br><br>
+
+< script><br><br>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Traversing</title>
+    <script>
+
+        $(document).ready(function(){
+
+            console.log($("span.subchild").parent()); // returns [div.child]
+
+            console.log($("span.subchild").parents("div.parent")); // returns [div.parent]
+
+            // returns [ div.child, div.parent, div.grandparent ]
+            console.log($("span.subchild").parents());
+
+
+            // returns [ div.child, div.parent ]
+            console.log($("span.subchild").parentsUntil("div.grandparent"));
+
+            console.log($("span.subchild").closest("div")); // returns [div.child]
+
+            // returns [ div.child ] as the selector is also included in the search:
+            console.log($("div.child").closest("div"));
+
+
+            console.log($("div.grandparent").children("div"));
+            // returns [div.parent, div.surrogateParent1, div.surrogateParent2]
+
+            console.log($("div.grandparent").find("div"));
+            // returns [ div.child, div.parent, div.surrogateParent1, div.surrogateParent2 ]
+
+
+            console.log($("div.parent").next()); // returns [ div.surrogateParent1 ]
+
+
+            console.log($("div.parent").prev());
+            // returns [] as No sibling exists before div.parent
+
+            console.log($("div.parent").nextAll());
+            // returns [ div.surrogateParent1, div.surrogateParent2 ]
+
+            console.log($("div.parent").nextAll().first());
+            // returns [ div.surrogateParent1 ]
+
+            console.log($("div.parent").nextAll().last());
+            // returns [ div.surrogateParent2 ]
+
+            console.log($("div.surrogateParent2").prevAll());
+            // returns [ div.surrogateParent1, div.parent ]
+
+            console.log($("div.surrogateParent2").prevAll().first());
+            // returns [ div.surrogateParent1 ]
+
+            console.log($("div.surrogateParent2").prevAll().last());
+            // returns [ div.parent ]
+
+            console.log($("div.parent").siblings());
+            // returns [ div.surrogateParent1, div.surrogateParent2 ]
+
+            console.log($("div.surrogateParent").siblings());
+            // returns [ div.parent, div.surrogateParent2 ]
+
+
+        });
+
+
+    </script>
+
+</head>
+<body>
+
+
+<h3>Traversing</h3>
+Once you've made an initial selection with jQuery, you can<br>
+traverse deeper into what was just selected. Traversing can <br>
+be broken down into three basic parts: parents, children, <br>
+and siblings. jQuery has an abundance of easy-to-use methods <br>
+for all these parts.<br><br>
+
+Here is a outline of html<br><br>
+
+< div class="grandparent"><br>
+    < div class="parent"><br>
+        < div class="child"><br>
+            < span class="subchild">< /span><br>
+        < /div><br>
+    < /div><br>
+    < div class="surrogateParent1">< /div><br>
+    < div class="surrogateParent2">< /div><br>
+< /div><br><br>
+
+<h3>Parents</h3>
+The methods for finding the parents from a selection<br>
+include .parent(), .parents(), .parentsUntil(), and .closest().<br><br>
+
+$("span.subchild").parent(); // returns [div.child]<br><br>
+
+$("span.subchild").parents("div.parent"); // returns [div.parent]<br><br>
+
+// returns [ div.child, div.parent, div.grandparent ]<br>
+$("span.subchild").parents();<br><br>
+
+
+// returns [ div.child, div.parent, div.grandparent]<br>
+$("span.subchild").parentsUntil("div.grandparent");<br><br>
+
+$("span.subchild").closest("div"); // returns  [div.child]<br><br>
+
+// returns [ div.child ] as the selector is also included in the search:<br>
+$("div.child").closest("div");<br><br><br>
+
+
+you can inspect the web page to see the results in console.
+
+<h3>Children</h3>
+The methods for finding child elements from a selection<br>
+include .children() and .find().<br><br>
+
+console.log($("div.grandparent").children("div"));<br>
+// returns [div.parent, div.surrogateParent1, div.surrogateParent2]<br><br>
+
+console.log($("div.grandparent").find("div"));<br>
+// returns [div.child, div.parent, div.surrogateParent1, div.surrogateParent2]
+<br><br>
+
+
+<h3>Siblings</h3>
+The rest of the traversal methods within jQuery all deal with <br>
+finding sibling selections. There are a few basic methods as far <br>
+as the direction of traversal is concerned. You can find previous <br>
+elements with .prev(), next elements with .next(), and both with <br>
+.siblings(). There are also a few other methods that build onto <br>
+these basic methods: .nextAll(), .nextUntil(), .prevAll() and .prevUntil().<br><br>
+
+console.log($("div.parent").next()); // returns [ div.surrogateParent1 ]<br><br>
+
+
+console.log($("div.parent").prev());<br>
+// returns [] as No sibling exists before div.parent<br><br>
+
+console.log($("div.parent").nextAll());<br>
+// returns [ div.surrogateParent1, div.surrogateParent2 ]<br><br>
+
+console.log($("div.parent").nextAll().first());<br>
+// returns [ div.surrogateParent1 ]<br><br>
+
+console.log($("div.parent").nextAll().last());<br>
+// returns [ div.surrogateParent2 ]<br><br>
+
+console.log($("div.surrogateParent2").prevAll());<br>
+// returns [ div.surrogateParent1, div.parent ]<br><br>
+
+console.log($("div.surrogateParent2").prevAll().first());<br>
+// returns [ div.surrogateParent1 ]<br><br>
+
+console.log($("div.surrogateParent2").prevAll().last());<br>
+// returns [ div.parent ]<br><br>
+
+
+Use .siblings() to select all siblings:<br><br>
+
+console.log($("div.parent").siblings());<br>
+// returns [ div.surrogateParent1, div.surrogateParent2 ]<br><br>
+
+console.log($("div.surrogateParent").siblings());<br>
+// returns [ div.parent, div.surrogateParent2 ]<br><br>
+
+
+<div class="grandparent">
+<div class="parent">
+<div class="child">
+<span class="subchild"></span>
+</div></div>
+    <div class="surrogateParent1"></div>
+    <div class="surrogateParent2"></div>
+</div>
+
+
+</body>
+</html>

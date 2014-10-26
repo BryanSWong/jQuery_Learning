@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Handling Events</title>
+</head>
+<body>
+
+The event object<br><br>
+
+<p>
+    Handling events can be tricky. It's often helpful to use the
+    extra information contained in the event object passed to the
+    event handler for more control. To become familiar with the
+    event object, use this code to inspect it in your browser
+    console after you click on a < div> in the page.
+</p>
+
+
+$("div").on("click", function(event){<br>
+console.log("event object.");<br>
+console.log(event);<br>
+});<br><br>
+
+<div>Example div</div>
+
+<script>
+    $("div").on("click",function(event){
+        console.log("event object:");
+        console.dir(event);
+    });
+
+</script>
+
+
+</body>
+</html>

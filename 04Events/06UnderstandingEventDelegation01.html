@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Understanding Event Delegation</title>
+</head>
+<body>
+
+<p>Event delegation allows us to attach a single event listener,
+    to a parent element, that will fire for all descendants matching
+    a selector, whether those descendants exist now or are added
+    in the future.</p>
+
+
+<div id="container">
+    <ul id="list">
+        <li><a href="http://domain1.com">Item #1</a></li>
+        <li><a href="http://domain2.com">Item #2</a></li>
+        <li><a href="http://domain3.com">Item #3</a></li>
+        <li><a href="http://domain4.com">Item #4</a></li>
+    </ul>
+</div>
+
+
+<p>When an anchor in our #list group is clicked, we want to
+    log its text to the console. Normally we could directly
+    bind to the click event of each anchor using the .on()
+    method:</p>
+
+
+Example:<br><br>
+
+attach a directly bound event<br>
+$("#list a").on("click", function(event){
+event.preventDefault();
+console.log($(this).text());
+});
+
+<script>
+    $("#list a").on("click", function(event){
+        event.preventDefault();
+        console.log($(this).text());
+    });
+</script>
+
+
+
+</body>
+</html>
