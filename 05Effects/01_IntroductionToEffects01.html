@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Introduction to Effects</title>
+</head>
+<body>
+
+<h3>The .hide() and .show() demo</h3>
+
+<p id="p1">This paragraph will go into hiding and reveal itself based on the button pressed.</p>
+
+<p>This one will stay here and show itself only because the first two buttons don't effect it.
+    But it wont come back affer the third button is pressed.
+</p>
+
+<button type="button" id="b1">Hide it!</button><br>
+<button type="button" id="b2">Show it!</button><br>
+<button type="button" id="b3">Hide all!</button><br>
+
+<script>
+
+        $("#b1").click(function(){
+            $("#p1").hide();
+        });
+
+        $("#b2").click(function(){
+            $("#p1").show();
+        });
+
+        $("#b3").click(function(){
+            $("p").hide();
+        });
+
+
+
+</script>
+
+<p>When jQuery hides an element, it sets its CSS display property to none.
+    This means the content will have zero width and height; it does not mean
+    that the content will simply become transparent and leave an empty area
+    on the page.</p>
+
+
+
+</body>
+</html>

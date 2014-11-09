@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>The uses of jQuery .queue() and .dequeue() part 2</title>
+</head>
+<body>
+
+<h3>The uses of jQuery .queue() and .dequeue()</h3>
+
+
+Queueing something like Ajax Calls:<br><br>
+
+Example:<br>
+
+// jQuery on an empty object, we are going to use this as our queue<br>
+var ajaxQueue = $({});<br><br>
+
+$.ajaxQueue = function(ajaxOpts){<br>
+// Hold the original complete function.<br>
+var oldComplete = ajaxOpts.complete;<br><br>
+
+// Queue our ajax request.<br>
+ajaxQueue.queue(function(next){<br>
+// Create a complete callback to fire the next event in the queue.<br>
+ajaxOpts.complete = function(){<br>
+// Fire the original complete if it was there<br>
+if(oldcomplete){<br>
+oldComplete.apply(this,arguments);<br>
+}<br>
+// Run the next query in the queue.<br>
+next();<br>
+};<br>
+$.ajax(ajaxOpts);<br>
+});<br>
+};<br><br>
+
+// Get each item we want to copy.<br>
+$( "#items li" ).each(function( idx ) {<br>
+// Queue up an ajax request.<br>
+$.ajaxQueue({<br>
+url: "/ajax_html_echo/",<br>
+data: {<br>
+html:"[" + idx + "] " + $(this).html()<br>
+},<br>
+type: "POST",<br>
+success: function(data){<br>
+// Write to #output.<br>
+$("#output").append($("< li >", {<br>
+    html: data<br>
+    }));<br>
+    }<br>
+    });<br>
+    });<br><br>
+
+
+
+<ul id="items">
+    <li>One</li>
+    <li>Two</li>
+    <li>Three</li>
+</ul>
+
+
+<script>
+    // jQuery on an empty object, we are going to use this as our queue
+    var ajaxQueue = $({});
+
+    $.ajaxQueue = function(ajaxOpts){
+        // Hold the original complete function.
+        var oldComplete = ajaxOpts.complete;
+
+        // Queue our ajax request.
+        ajaxQueue.queue(function(next){
+            // Create a complete callback to fire the next event in the queue.
+            ajaxOpts.complete = function(){
+                // Fire the original complete if it was there
+                if(oldComplete){
+                    oldComplete.apply(this,arguments);
+                }
+                // Run the next query in the queue.
+                next();
+            };
+            $.ajax(ajaxOpts);
+        });
+    };
+
+    // Get each item we want to copy.
+    $( "#items li" ).each(function( idx ) {
+        // Queue up an ajax request.
+        $.ajaxQueue({
+           url: "/ajax_html_echo/",
+            data: {
+                html:"[" + idx + "] " + $(this).html()
+            },
+            type: "POST",
+            success: function(data){
+                // Write to #output.
+                $("#output").append($("<li>", {
+                    html: data
+                }));
+            }
+        });
+    });
+
+</script>
+
+
+</body>
+</html>

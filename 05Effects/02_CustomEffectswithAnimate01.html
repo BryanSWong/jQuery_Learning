@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Custom Effects with .animate()</title>
+
+    <style>
+
+        .blue{
+            width: 300px;
+            height: 100px;
+            background-color: blue;
+            text-align: center;
+            position: relative;
+            left: 300px;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<h3>Custom Effects with .animate()</h3>
+
+<p>
+    jQuery makes it possible to animate arbitrary CSS properties via the
+    .animate() method. The .animate() method lets you animate to a set value,
+    or to a value relative to the current value.
+</p>
+
+Example:<br><br>
+
+
+<div class="blue" id="d1">Example Div</div><br><br>
+
+<button type="button" id="b1">Animate it!</button>
+
+<h3>Easing</h3>
+
+<p>
+    Definition: Easing describes the manner in which an effect occurs
+    — whether the rate of change is steady, or varies over the duration
+    of the animation. jQuery includes only two methods of easing: swing
+    and linear. If you want more natural transitions in your animations,
+    various easing plugins are available.
+</p>
+
+
+As of jQuery 1.4, it is possible to do per-property easing when using the .animate() method.<br><br>
+
+Example:<br><br>
+
+<div class="blue" id="d2">Example div#2</div><br><br>
+
+<button type="button" id="b2">Demo Easing</button><br><br>
+
+
+<script>
+
+    $("#b1").click(function(){
+        $("#d1").animate({
+            left: "+=400",
+            opacity: 0.05}, 3000,
+                function(){
+                    console.log("done!");
+                }
+        );
+    });
+
+
+    $("#b2").click(function(){
+        $("#d2").animate({
+            left: ["+=400","swing"],
+            opacity: [0.25, "linear"]
+        }, 3000);
+    });
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

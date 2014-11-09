@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Queue & Dequeue Explained</title>
+
+    <style>
+
+        .box{
+            width: 150px;
+            height: 150px;
+            background-color: red;
+            text-align: center;
+            color: yellow;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+
+<h3>Queue & Dequeue Explained</h3>
+
+<p>
+    When you use the animate, and show, hide, slideUp, etc. effect methods,
+    you're adding a job to the effects queue. By default, using queue()
+    and passing a function, will add it to the effects queue. So we're
+    creating our own bespoke animation step:
+</p>
+
+<p>
+    As I said though, these methods come in pairs, so anything you add
+    using queue(), you need to dequeue to allow the process to continue. In
+    the code above, if I chained more animations on, until I call
+    $( this ).dequeue(), the subsequent animations wouldn't run:
+</p>
+
+
+<div class="box" id="d1">
+
+    Example Div<br><br>
+
+    <p id="title"></p>
+
+</div>
+<br><br>
+<button type="button" id="b1">Animate</button>
+
+
+<p>
+    Keeping in mind that the animation won't continue until we've
+    explicitly called dequeue(), we can easily create a pausing plugin,
+    by adding a step in the queue that sets a timer and triggers after
+    n milliseconds, at which time, it dequeues the element:
+</p>
+
+Example:<br><br>
+
+$.fn.pause = function(n){<br>
+return this.queue(function(){<br>
+var el = this;<br>
+setTimeout(function(){<br>
+return $(el).dequeue();<br>
+}, n);<br>
+});<br>
+};<br><br>
+
+$(".box").animate({<br>
+height:20<br>
+}, "slow").pause(1000).animate({<br>
+height: 150<br>
+});<br><br>
+
+Example in action:<br><br>
+
+<div class="box" id="d2">Example div#2</div><br><br>
+
+<button type="button" id="b2">Example 2</button>
+
+
+<script>
+
+    $("#b1").click(function(){
+        $(".box").animate({
+            height: 20
+        }, "slow").queue(function(){
+            $("#title").html("We're in the animation, baby!");
+            $(this).dequeue();
+        }).animate({
+            height: 150
+        });
+    });
+
+    $.fn.pause = function(n){
+        return this.queue(function(){
+            var el = this;
+            setTimeout(function(){
+                return $(el).dequeue();
+            }, n);
+        });
+    };
+
+    $("#b2").click(function(){
+    $("#d2").animate({
+        height: 20
+    }, "slow").pause(1000).animate({
+        height: 150
+    });
+
+    });
+
+
+
+</script>
+
+
+
+</body>
+</html>

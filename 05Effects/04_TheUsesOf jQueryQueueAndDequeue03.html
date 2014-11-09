@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>The uses of jQuery .queue() and .dequeue() part 3</title>
+</head>
+<body>
+
+
+<h3>The uses of jQuery .queue() and .dequeue() part 3</h3>
+
+link Another custom queue example:<br><br>
+
+// jQuery on an empty object - a perfect queue holder<br>
+var theQueue = $({});<br><br>
+
+$.each([1,2,3], function(i,num){<br><br>
+
+// Let's add some really simple functions to a queue:<br>
+theQueue.queue("alerts", function(next){<br><br>
+
+// Show something, and if they hit "yes", run the next function.<br>
+if(confirm("index:" + i + " = " + num + "\nRun the next function")){<br>
+next();<br>
+}<br>
+});<br>
+});<br><br>
+
+// Create a button to run the queue.<br>
+$("< button >", {<br>
+    text: "Run Queue",<br>
+    click: function(){<br>
+    theQueue.dequeue("alerts");<br>
+    }<br>
+    }).appendTo("body");<br><br>
+
+
+    // Create a button to show the length.<br>
+    $("< button >", {<br>
+        text: "Show Length",<br>
+        click: function(){<br>
+        alert(theQueue.queue("alerts").length);<br>
+        }<br>
+        }).appendTo("body");<br><br><br>
+
+
+
+
+<script>
+
+
+    // jQuery on an empty object - a perfect queue holder
+    var theQueue = $({});
+
+    $.each([1,2,3], function(i,num){
+
+        // Let's add some really simple functions to a queue:
+        theQueue.queue("alerts", function(next){
+
+            // Show something, and if they hit "yes", run the next function.
+            if(confirm("index:" + i + " = " + num + "\nRun the next function")){
+                next();
+            }
+        });
+    });
+
+    // Create a button to run the queue.
+    $("<button>", {
+        text: "Run Queue",
+        click: function(){
+            theQueue.dequeue("alerts");
+        }
+    }).appendTo("body");
+
+
+    // Create a button to show the length.
+    $("<button>", {
+        text: "Show Length",
+        click: function(){
+            alert(theQueue.queue("alerts").length);
+        }
+    }).appendTo("body");
+
+</script>
+
+</body>
+</html>

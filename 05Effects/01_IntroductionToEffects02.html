@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Introduction to Effects part 2</title>
+
+    <style>
+
+        .blue {
+            background-color: blue;
+            width: 300px;
+            height: 100px;
+            text-align: center;
+
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<h3>Showing and Hiding Content with animation effects.</h3>
+
+<p>jQuery can also show or hide content by means of animation effects.
+    You can tell .show() and .hide() to use animation in a couple of ways.
+    One is to pass in an argument of 'slow', 'normal', or 'fast', If you prefer
+    more direct control over the duration of the animation effect, you can pass the
+    desired duration in milliseconds to .show() and .hide()</p>
+
+<h4>Example:</h4>
+
+<div class="blue" id="d1">Example div</div><br><br>
+
+<button type="button" id="b1">Slowly hide div</button><br>
+<button type="button" id="b2">Quickly hide div</button><br>
+<button type="button" id="b3">Hide div slowly over time eg: 2sec</button><br>
+<button type="button" id="b4">Slowly reveal div</button><br>
+<button type="button" id="b5">Show div</button><br>
+
+<script>
+
+    $("#b1").click(function(){
+        $("#d1").hide("slow");
+    });
+
+    $("#b2").click(function(){
+        $("#d1").hide("fast");
+    });
+
+    $("#b3").click(function(){
+        $("#d1").hide(2000)
+    });
+
+    $("#b4").click(function(){
+        $("#d1").show(1250);
+    });
+
+    $("#b5").click(function(){
+        $("#d1").show();
+    });
+
+</script>
+
+
+</body>
+</html>

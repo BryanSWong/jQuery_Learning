@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Doing Something After an Animation Completes</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+		</script>
+		<style>
+		
+		.blue{
+			width: 300px;
+			height: 100px;
+			background-color: blue;
+			
+		}
+
+        div{
+            width: 100px;
+            height: 100px;
+            display:none;
+            background-color: green;
+        }
+
+		</style>
+		
+	</head>
+	<body>
+	
+	<h3>Doing Something After an Animation Completes</h3>
+	
+	<p>
+	
+	A common mistake when implementing jQuery effects is assuming that the 
+	execution of the next method in your chain will wait until the animation 
+	runs to completion.
+	
+	</p>
+	
+	
+	<p>
+	
+	It is important to realize that .fadeIn() above only kicks off the animation. 
+	Once started, the animation is implemented by rapidly changing CSS properties in a 
+	JavaScript setInterval() loop. When you call .fadeIn(), it starts the animation 
+	loop and then returns the jQuery object, passing it along to .addClass() which will 
+	then add the lookAtMe style class while the animation loop is just getting started.
+	
+	</p>
+	
+	<p>
+	
+	To defer an action until after an animation has run to completion, you need 
+	to use an animation callback function. You can specify your animation callback 
+	as the second argument passed to any of the animation methods discussed above. 
+	For the code snippet above, we can implement a callback as follows:
+	
+	</p>
+
+
+    Example:<br><br>
+
+    <div>Example div</div>
+
+    <br>
+
+    <button type="button" id="b1">Show the div</button><br><br>
+
+    <p>
+        Note that you can use the keyword this to refer to the DOM element
+        being animated. Also note that the callback will be called for each
+        element in the jQuery object. This means that if your selector returns
+        no elements, your animation callback will never run! You can solve this
+        problem by testing whether your selection returned any elements; if not,
+        you can just run the callback immediately.
+    </p>
+
+
+    Example code:<br><br>
+
+    var someElement = $("#nonexsistant");<br><br>
+
+    var cb = function(){<br>
+    console.log("done!");<br>
+    };<br><br>
+
+    if(someElement.length){<br>
+    someElement.fadeIn(2000, cb);<br>
+    }<br><br>
+
+    else{<br>
+    cb();<br>
+    }<br><br>
+
+    <script>
+
+        $("#b1").click(function(){
+            $("div").fadeIn(2000, function(){
+                $(this).addClass("blue");
+            });
+        });
+
+        var someElement = $("#nonexsistant");
+
+        var cb = function(){
+            console.log("done!");
+        };
+
+        if(someElement.length){
+            someElement.fadeIn(2000, cb);
+        }
+
+        else{
+            cb();
+        }
+
+
+
+    </script>
+	
+	
+	
+	
+	
+	</body>
+	</html>

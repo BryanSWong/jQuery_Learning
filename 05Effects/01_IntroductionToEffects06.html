@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery.js"></script>
+    <title>Managing Animation Effects</title>
+
+    <style>
+
+        .blue{
+            width: 300px;
+            height: 100px;
+            background-color: blue;
+            text-align: center;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<h3>Managing Animation Effects</h3>
+
+<p>
+    .stop() will immediately terminate all animations running on the elements
+    in your selection. You might give end-users control over page animations by
+    rigging a button they can click to stop the animations.
+</p>
+
+Example:<br><br>
+
+<div class="blue" id="d1">Example Div</div><br><br>
+Press the start button to start and the stop button to stop <br>
+the animation before it completes. This button works on all <br>
+animation on the page. even the demo below but with the in delay the demo<br>
+below will just move on to the next animation, so it stops only current but does not disable it.<br>
+<button type="button" id="b1">Start the animation</button><br>
+<button type="button" id="b2">Stop all animation</button><br><br>
+
+
+<h4>.delay()</h4>
+
+<p>.delay() is used to introduce a delay between successive animations. For example:</p>
+
+<div class="blue" id="d2">Example div#2</div><br><br>
+Press the button to see the div#2 hide in 2 seconds and 1 second later show in 4 seconds.<br>
+<button type="button" id="b3">Demo delay</button><br><br>
+
+<h4>jQuery.fx</h4>
+
+<p>
+    The jQuery.fx object has a number of properties that control how effects
+    are implemented. jQuery.fx.speeds maps the slow, normal, and fast duration
+    arguments mentioned above to a specific number of milliseconds. The default
+    value of jQuery.fx.speeds is:
+</p>
+
+slow: 600;<br>
+fast: 200;<br>
+_defualt: 400; // normal speed<br><br>
+
+You can modify any of these settings and even introduce some of your own:<br><br>
+
+jQuery.fx.speeds.fast = 300;<br>
+jQuery.fx.speeds.blazing = 100;<br>
+jQuery.fx.speeds.excruciating = 60000;<br><br>
+
+<p>
+jQuery.fx.interval controls the number of frames per second that is
+    displayed in an animation. The default value is 13 milliseconds
+    between successive frames. You can set this to a lower value for
+    faster browsers to make the animations run smoother. However this
+    will mean more frames per second and thus a higher computational load for
+    the browser, so you should be sure to test the performance implications of
+    doing so thoroughly.
+</p>
+<p>
+Finally, jQuery.fx.off can be set to true to disable all animations.
+    Elements will immediately be set to the target final state instead. This can
+    be especially useful when dealing with older browsers; you also may want to
+    provide the option to disable all animations to your users.
+</p>
+
+Example:<br><br>
+
+$("< button type='button'>< /button>")<br>
+.text("Disable Animations")<br>
+.on("click", function(){<br>
+jQuery.fx.off = true;<br>
+}).appendTo("#here");<br>
+<br>
+Press this button to disable all the animations this button was also create via code above.<br>
+As far as I can tell it does not animate but does the show and hide instantaneous, but delays will still take effect<br>
+<div id="here"></div><br><br>
+
+<script>
+
+    $("#b1").click(function(){
+        $("#d1").fadeOut(6000);
+    });
+
+    $("#b2").click(function(){
+        $("body *").filter(":animated").stop();
+    });
+
+    $("#b3").click(function(){
+        $("#d2").hide(2000).delay(1500).show(4000);
+    });
+
+    $("<button type='button'></button>").text("Disable Animations").on("click", function(){
+        jQuery.fx.off = true;
+    }).appendTo("#here");
+
+</script>
+
+
+</body>
+</html>
