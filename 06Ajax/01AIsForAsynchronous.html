@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Key Concepts</title>
+</head>
+<body>
+
+
+<p>The asynchronicity of Ajax catches many new jQuery users off guard.<br>
+Because Ajax calls are asynchronous by default, the response is not<br>
+immediately available. Responses can only be handled using a callback.<br>
+So, for example, the following code will not work:</p>
+
+<p>
+    var response;<br><br>
+
+    $get.("foo.php", function(r){<br>
+    response = r;<br>
+    });<br><br>
+
+    console.log(response);
+</p>
+
+<p>Instead, we need to pass a callback function to our request; <br>
+    this callback will run when the request succeeds, at which <br>
+    point we can access the data that it returned, if any.
+</p>
+
+<p>
+    $.get( "foo.php ), function(response){<br>
+    console.log(response);// server response<br>
+    });
+</p>
+
+<script>
+    $.get("foo.php", function(response){
+        console.log(response); //server response
+    });
+</script>
+
+
+
+</body>
+</html>
