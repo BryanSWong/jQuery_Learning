@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>jQuerys Ajax-Related Methods part 2</title>
+</head>
+<body>
+
+Using jQuery's Ajax convenience methods<br><br>
+
+Get plain text or HTML<br><br>
+
+$.get("/users.php", {<br>
+userId: 1234<br>
+}, function(resp){<br>
+console.log(resp);// server response<br>
+});<br><br>
+// Add a script to the page, then run a function defined in it<br>
+$.getScript("/static/js/myScript.js", function(){<br>
+functionFromMyScript();<br>
+});<br><br>
+// Get JSON-formatted data from the server<br>
+$.getJSON("details.php", function(resp){<br>
+// Log each key in the response data<br>
+$.each(resp, function(key, value){<br>
+console.log(key+ " : " +value);<br>
+});<br>
+});<br><br>
+
+<script>
+    $.get("/users.php", {
+        userId: 1234
+    }, function(resp){
+        console.log(resp);
+    });
+
+    $.getScript("/static/js/myScript.js", function(){
+        functionFromMyScript();
+    });
+
+    $.getJSON("details.php", function(resp){
+        $.each(resp, function(key, value){
+            console.log(key+ " : " +value);
+        });
+    });
+
+</script>
+
+</body>
+</html>
