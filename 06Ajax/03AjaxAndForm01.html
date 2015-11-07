@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Ajax and Form part 1</title>
+</head>
+<body>
+
+<h1>Serialization</h1><br>
+
+Serializing form inputs in jQuery is extremely easy. Two methods come supported <br>
+natively: .serialize() and .serializeArray(). While the names are fairly <br>
+self-explanatory, there are many advantages to using them.<br><br>
+
+The .serialize() method serializes a form's data into a query string. For the <br>
+element's value to be serialized, it must have a name attribute. Please note that <br>
+values from inputs with a type of checkbox or radio are included only if they are <br>
+checked.<br><br>
+
+Example:<br><br>
+
+// Turning form data into a query string<br>
+console.log($("#myForm").serialize());<br><br>
+
+// Creates a query string like this:<br>
+// field_1=something&field2=somethingElse<br><br>
+
+
+
+<form id="myForm">
+    <input type="radio" name="switch1" value="ON" checked>ON
+    <br>
+    <input type="radio" name="switch2" value="OFF">OFF
+</form>
+
+<script>
+        console.log($("#myForm").serialize());
+</script>
+<br><br>
+
+While plain old serialization is great, sometimes your application would work better <br>
+if you sent over an array of objects, instead of just the query string. For that, jQuery <br>
+has the .serializeArray() method. It's very similar to the .serialize() method listed above, <br>
+except it produces an array of objects, instead of a string.<br><br>
+
+Example:<br><br>
+
+// Creating an array of objects containing form data<br>
+console.log($("#myForm2").serializeArray());<br><br>
+
+// Creates a structure like this:<br>
+// [<br>
+//   {<br>
+//     name : "field_1",<br>
+//     value : "something"<br>
+//   },<br>
+//   {<br>
+//     name : "field_2",<br>
+//     value : "somethingElse"<br>
+//   }<br>
+// ]<br><br>
+
+<form id="myForm2">
+    <input type="radio" name="switch1" value="ON" checked>ON
+    <br>
+    <input type="radio" name="switch2" value="OFF">OFF
+</form>
+
+<script>
+    console.log($("#myForm2").serializeArray());
+</script>
+<br><br>
+
+
+</body>
+</html>

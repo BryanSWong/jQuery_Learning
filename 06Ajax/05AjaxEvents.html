@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Ajax Events</title>
+</head>
+<body>
+
+<h1>Ajax Events</h1>
+
+Often, you'll want to perform an operation whenever an Ajax request starts <br>
+or stops, such as showing or hiding a loading indicator. Rather than defining <br>
+this behavior inside every Ajax request, you can bind Ajax events to elements <br>
+just like you'd bind other events.<br><br>
+
+Example:<br><br>
+
+// Setting up a loading indicator using Ajax Events<br>
+$( "#loading_indicator" )<br>
+.ajaxStart(function() {<br>
+$( this ).show();<br>
+})<br>
+.ajaxStop(function() {<br>
+$( this ).hide();<br>
+});<br>
+<br>
+<br>
+
+<div id="loading_indicator">
+    example div
+</div>
+<script>
+    $( "#loading_indicator" )
+            .ajaxStart(function() {
+                $(this).show();
+            })
+            .ajaxStop(function() {
+                $(this).hide();
+            });
+</script>
+
+</body>
+</html>

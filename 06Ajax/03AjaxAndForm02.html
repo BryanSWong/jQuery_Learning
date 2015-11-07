@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Ajax and Form part 2</title>
+</head>
+<body>
+
+<h1>Client-side validation</h1>
+
+Client-side validation is, much like many other things, extremely easy using jQuery.<br>
+While there are several cases developers can test for, some of the most common ones are: <br>
+presence of a required input, valid usernames/emails/phone numbers/etc…, or checking an <br>
+"I agree…" box.<br><br>
+
+Please note that it is advisable that you also perform server-side validation for your inputs.<br>
+However, it typically makes for a better user experience to be able to validate some things<br>
+without submitting the form.<br><br>
+
+With that being said, let's jump on in to some examples! First, we'll see how easy it is to check <br>
+if a required field doesn't have anything in it. If it doesn't, then we'll return false, and <br>
+prevent the form from processing.<br><br>
+
+Example:<br><br>
+
+// Using validation to check for the presence of an input<br>
+$( "#form" ).submit(function( event ) {<br><br>
+
+// If .required's value's length is zero<br>
+if ( $( ".required" ).val().length === 0 ) {<br><br>
+
+// Usually show some kind of error message here<br>
+
+// Prevent the form from submitting<br>
+event.preventDefault();<br>
+} else {<br><br>
+
+// Run $.ajax() here<br>
+}<br>
+});<br>
+
+<form class="required">
+    First name:<br>
+    <input type="text" name="firstname">
+    <br>
+    Last name:<br>
+    <input type="text" name="lastname">
+</form>
+
+<script>
+    $("#form").submit(function( event ) {
+        if ( $(".required").val().length === 0 ) {
+            event.preventDefault();
+        } else {
+        // Run $.ajax() here
+        }
+    });
+</script>
+<br><br>
+Let's see how easy it is to check for invalid characters in a phone number:<br><br>
+
+// Validate a phone number field<br>
+$( "#form" ).submit(function( event ) {<br>
+var inputtedPhoneNumber = $( "#phone" ).val();<br><br>
+
+// Match only numbers<br>
+var phoneNumberRegex = /^\d*$/;<br><br>
+
+// If the phone number doesn't match the regex<br>
+if ( !phoneNumberRegex.test( inputtedPhoneNumber ) ) {<br><br>
+
+// Usually show some kind of error message here<br><br>
+
+// Prevent the form from submitting<br>
+event.preventDefault();<br>
+} else {<br><br>
+
+// Run $.ajax() here<br>
+}<br>
+});<br><br>
+
+
+<script>
+
+    $("#form").submit(function( event ) {
+        var inputtedPhoneNumber = $("#phone").val();
+
+        var phoneNumberRegex = /^\d*$/;
+
+        if (!phoneNumberRegex.test(inputtedPhoneNumber)) {
+
+            event.preventDefault();
+        } else {
+            // Run $.ajax() here
+        }
+    });
+</script>
+
+<form id="form">
+    Enter phone Number:<br>
+    <input type="text" name="number">
+    <br>
+</form>
+<br><br>
+
+
+</body>
+</html>

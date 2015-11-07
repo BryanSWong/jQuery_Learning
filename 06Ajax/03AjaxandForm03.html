@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Ajax and form part 3</title>
+</head>
+<body>
+
+<h1>Prefiltering</h1>
+
+A prefilter is a way to modify the ajax options before each<br>
+request is sent (hence, the name prefilter).<br><br>
+
+For example, say we would like to modify all cross-domain <br>
+requests through a proxy. To do so with a prefilter is quite simple:<br><br>
+
+Example:<br><br>
+
+// Using a proxy with a prefilter<br>
+$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {<br>
+if ( options.crossDomain ) {<br>
+options.url = "http://mydomain.net/proxy/" + encodeURIComponent( options.url );<br>
+options.crossDomain = false;<br>
+}<br>
+});<br><br>
+
+
+<script>
+    $.ajaxPrefilter(function(options, originalOptions, jqXHR){
+        if (options.crossDomain) {
+            options.url = "http://mydomain.net/proxy/" + encodeURIComponent(options.url);
+            options.crossDomain = false;
+        }
+    });
+</script>
+
+You can pass in an optional argument before the callback function that <br>
+specifies which dataTypes you'd like the prefilter to be applied to. For <br>
+example, if we want our prefilter to only apply to JSON and script requests, <br>
+we'd do:<br><br>
+
+// Using the optional dataTypes argument<br>
+$.ajaxPrefilter( "json script", function( options, originalOptions, jqXHR ) {<br><br>
+
+// Do all of the prefiltering here, but only for<br>
+// requests that indicate a dataType of "JSON" or "script"<br>
+});<br><br>
+
+<script>
+    $.ajaxPrefilter( "json script", function( options, originalOptions, jqXHR ) {
+        // Do all of the prefiltering here, but only for
+        // requests that indicate a dataType of "JSON" or "script"
+    });
+</script>
+
+</body>
+</html>

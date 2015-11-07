@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>jQuerys Ajax-Related Methods part 3</title>
+</head>
+<body>
+
+<h1>$.fn.load</h1><br><br>
+
+The .load() method is unique among jQuery’s Ajax methods in that it is called <br>
+on a selection. The .load() method fetches HTML from a URL, and uses the <br>
+returned HTML to populate the selected element(s). In addition to providing a <br>
+URL to the method, you can optionally provide a selector; jQuery will fetch <br>
+only the matching content from the returned HTML.<br><br>
+
+Examples:<br><br>
+
+// Using .load() to populate an element<br>
+
+$("#newContent").load("/foo.html");<br>
+Sadly this does not run locally but on a server it will be fine.<br>
+
+
+<div id="newContent" style="float:left;width:200px;min-width:400px;min-height:100px; background-color: cornflowerblue;">
+
+
+
+</div>
+<br>
+
+<script>
+    $("#newContent").load("/foo.html");
+</script>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+Example 2:
+<br>
+<br>
+// Using .load() to populate an element based on a selector<br>
+$("#newContent2").load("/foo.html #myDiv h1:first", function(html){<br>
+alert("content updated");<br>
+});<br>
+<br><br>
+
+<div id="newContent2"  style="float:left;width:200px;min-width:400px;min-height:100px;background-color: cornflowerblue; ">
+<div id="myDiv">
+    <h1>header to be modded?</h1>
+    <h1>not modded?</h1>
+</div>
+</div>
+<script>
+    $("#newContent2").load("/foo.html #myDiv h1:first", function(html){
+        alert("content updated");
+    });
+</script>
+
+
+</body>
+</html>

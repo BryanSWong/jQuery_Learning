@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Working with JSONP</title>
+</head>
+<body>
+
+<h1>Working with JSONP</h1>
+
+The advent of JSONP — essentially a consensual cross-site scripting hack — has opened<br>
+the door to powerful mashups of content. Many prominent sites provide JSONP services, <br>
+allowing you access to their content via a predefined API. A particularly great source <br>
+of JSONP-formatted data is the Yahoo! Query Language, which we'll use in the following <br>
+example to fetch news about cats.<br><br>
+
+Example:<br><br>
+
+// Using YQL and JSONP<br>
+$.ajax({<br>
+url: "http://query.yahooapis.com/v1/public/yql",<br>
+
+// The name of the callback parameter, as specified by the YQL service<br>
+jsonp: "callback",<br>
+
+// Tell jQuery we're expecting JSONP<br>
+dataType: "jsonp",<br>
+
+// Tell YQL what we want and that we want JSON<br>
+data: {<br>
+q: "select title,abstract,url from search.news where query=\"cat\"",<br>
+format: "json"<br>
+},<br>
+
+// Work with the response<br>
+success: function( response ) {<br>
+console.log( response ); // server response<br>
+}<br>
+});<br><br>
+
+
+<script>
+    $.ajax({
+        url: "http://query.yahooapis.com/v1/public/yql",
+        jsonp: "callback",
+        dataType: "jsonp",
+        data: {
+            q: "select title,abstract,url from search.news where query=\"cat\"",
+            format: "json"
+        },
+        success: function(response) {
+            console.log(response); // server response
+        }
+    });
+</script>
+
+
+</body>
+</html>
